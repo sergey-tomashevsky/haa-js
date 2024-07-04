@@ -8,9 +8,6 @@ export default defineConfig({
       input: {
         app: './src/index.js',
       },
-      output: {
-        entryFileNames: 'assets/index.js'
-      }
     },
   },
 });
