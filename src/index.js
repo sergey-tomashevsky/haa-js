@@ -16,7 +16,6 @@ function executeCurrentRoute() {
 window.navigation.addEventListener("navigate", (event) => {
   if (currentPage) currentPage.disconnect();
   currentPage = null;
-  stopCurrentObservers();
   executeCurrentRoute();
 });
 
