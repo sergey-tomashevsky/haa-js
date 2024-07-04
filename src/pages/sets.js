@@ -35,7 +35,7 @@ export default class SetsPage extends Page {
     const gameSubdomain = window.ty.dulst.subdomain;
     newMarketLink.href = `/${gameSubdomain}/market`;
     newMarketLink.classList.add('customElement');
-    newMarketLink.innerHTML = 'Market';
+    newMarketLink.innerHTML = 'Card Packs';
   }
 
   #highlightMarketHeaderLink() {
