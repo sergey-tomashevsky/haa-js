@@ -1,7 +1,7 @@
 const getLibraryCards = () => document.getElementById('libraryCards');
 
 const observer = new MutationObserver((mutation, observer) => {
-  console.log('mutation observed');
+  console.log('mutation observed', mutation);
   const libraryCards = getLibraryCards();
   if (!libraryCards) return;
 
@@ -16,3 +16,7 @@ const observer = new MutationObserver((mutation, observer) => {
 const wrapper = document.getElementById('wrapper');
 observer.observe(wrapper, { childList: true, subtree: true });
 console.log('observer started');
+
+window.navigation.addEventListener("navigate", (event) => {
+  console.log('location changed!');
+})
