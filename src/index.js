@@ -1,22 +1,44 @@
-const getLibraryCards = () => document.getElementById('libraryCards');
+let currentObservers = [];
 
-const observer = new MutationObserver((mutation, observer) => {
-  console.log('mutation observed', mutation);
-  const libraryCards = getLibraryCards();
-  if (!libraryCards) return;
+function updateCollectionPage() {
+  const observer = new MutationObserver(() => {
+    const libraryCards = document.getElementById('libraryCards');
+    if (!libraryCards) return;
 
-  observer.disconnect();
-  const newButton = document.createElement('div');
-  newButton.classList.add('button');
-  newButton.innerText = 'New custom button';
-  libraryCards.querySelector('header .filters').prepend(newButton);
-  console.log('button added');
-});
+    // Skip updating if custom elements already exist.
+    if (libraryCards.querySelector('.customElement')) return;
 
-const wrapper = document.getElementById('wrapper');
-observer.observe(wrapper, { childList: true, subtree: true });
-console.log('observer started');
+    const newButton = document.createElement('div');
+    newButton.classList.add('button');
+    newButton.classList.add('customElement');
+    newButton.innerText = 'New custom button';
+    libraryCards.querySelector('header .filters').prepend(newButton);
+    console.log('button added');
+  });
+
+  const wrapper = document.getElementById('wrapper');
+  observer.observe(wrapper, { childList: true, subtree: true });
+  currentObservers.push(observer);
+  console.log('observer started');
+}
+
+function executeCurrentRoute() {
+  if (window.location.includes('/decks')) {
+    updateCollectionPage()
+  }
+}
+
+function stopCurrentObservers() {
+  currentObservers.forEach(observer => {
+    observer.disconnect();
+  });
+  currentObservers = [];
+}
 
 window.navigation.addEventListener("navigate", (event) => {
   console.log('location changed!');
-})
+  stopCurrentObservers();
+  executeCurrentRoute();
+});
+
+executeCurrentRoute();
