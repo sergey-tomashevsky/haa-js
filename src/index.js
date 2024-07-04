@@ -15,7 +15,7 @@ function executeCurrentRoute() {
 }
 
 window.navigation.addEventListener("navigate", (event) => {
-  console.log('Location changed', window.location.href);
+  console.log('Location changed', window.location.href, event);
   if (currentPage) currentPage.disconnect();
   currentPage = null;
   executeCurrentRoute();
