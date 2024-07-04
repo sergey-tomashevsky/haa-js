@@ -1,42 +1,21 @@
-let currentObservers = [];
+import { CollectionPage, MarketPage } from "./pages";
 
-function updateCollectionPage() {
-  const observer = new MutationObserver(() => {
-    const libraryCards = document.getElementById('libraryCards');
-    if (!libraryCards) return;
-
-    // Skip updating if custom elements already exist.
-    if (libraryCards.querySelector('.customElement')) return;
-
-    const newButton = document.createElement('div');
-    newButton.classList.add('button');
-    newButton.classList.add('customElement');
-    newButton.innerText = 'New custom button';
-    libraryCards.querySelector('header .filters').prepend(newButton);
-    console.log('button added');
-  });
-
-  const wrapper = document.getElementById('wrapper');
-  observer.observe(wrapper, { childList: true, subtree: true });
-  currentObservers.push(observer);
-  console.log('observer started');
-}
+let currentPage;
 
 function executeCurrentRoute() {
   if (window.location.href.includes('/decks')) {
-    updateCollectionPage()
+    currentPage = new CollectionPage();
   }
-}
+  if (window.location.href.includes('/market'))  {
+    currentPage = new MarketPage();
+  }
 
-function stopCurrentObservers() {
-  currentObservers.forEach(observer => {
-    observer.disconnect();
-  });
-  currentObservers = [];
+  if (currentPage) currentPage.run();
 }
 
 window.navigation.addEventListener("navigate", (event) => {
-  console.log('location changed!');
+  if (currentPage) currentPage.disconnect();
+  currentPage = null;
   stopCurrentObservers();
   executeCurrentRoute();
 });
