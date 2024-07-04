@@ -12,7 +12,7 @@ export default class MarketPage extends Page {
       if (marketContainer.querySelector('.customElement')) return;
 
       const setsLink = document.createElement('a');
-      const gameSubdomain = window.ty.subdomain;
+      const gameSubdomain = window.ty.dulst.subdomain;
       setsLink.href = `/${gameSubdomain}/sets`;
       setsLink.classList.add('customElement');
       setsLink.innerHTML = 'Sets';
