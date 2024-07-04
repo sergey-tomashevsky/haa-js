@@ -23,7 +23,7 @@ function updateCollectionPage() {
 }
 
 function executeCurrentRoute() {
-  if (window.location.includes('/decks')) {
+  if (window.location.href.includes('/decks')) {
     updateCollectionPage()
   }
 }
