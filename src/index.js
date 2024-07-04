@@ -2,23 +2,23 @@ import { CollectionPage, MarketPage } from "./pages";
 
 let currentPage;
 
-function executeCurrentRoute() {
-  if (window.location.href.includes('/decks')) {
+function executeRoute(url) {
+  if (url.includes('/decks')) {
     currentPage = new CollectionPage();
   }
-  if (window.location.href.includes('/market'))  {
+  if (url.includes('/market'))  {
     currentPage = new MarketPage();
   }
 
-  console.log('executeCurrentRoute', currentPage);
+  console.log('executeRoute', currentPage);
   if (currentPage) currentPage.run();
 }
 
 window.navigation.addEventListener("navigate", (event) => {
-  console.log('Location changed', window.location.href, event);
+  console.log('Location changed', event);
   if (currentPage) currentPage.disconnect();
   currentPage = null;
-  executeCurrentRoute();
+  executeRoute(event.destination.url);
 });
 
-executeCurrentRoute();
+executeRoute(window.location.href);
