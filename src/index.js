@@ -10,10 +10,12 @@ function executeCurrentRoute() {
     currentPage = new MarketPage();
   }
 
+  console.log('executeCurrentRoute', currentPage);
   if (currentPage) currentPage.run();
 }
 
 window.navigation.addEventListener("navigate", (event) => {
+  console.log('Location changed', window.location.href);
   if (currentPage) currentPage.disconnect();
   currentPage = null;
   executeCurrentRoute();
