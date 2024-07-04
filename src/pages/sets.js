@@ -39,7 +39,7 @@ export default class SetsPage extends Page {
   }
 
   #highlightMarketHeaderLink() {
-    const marketLink = document.querySelector('#wrapper header.header li.market');
+    const marketLink = document.querySelector('#header li.market');
     marketLink.classList.add('active');
   }
 }
