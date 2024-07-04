@@ -1,0 +1,1 @@
+const e=new MutationObserver(((e,t)=>{const n=document.getElementById("libraryCards");if(!n)return;t.disconnect();const r=document.createElement("div");r.classList.add("button"),r.innerText="New custom button",n.querySelector("header .filters").prepend(r)})),t=document.getElementById("wrapper");e.observe(t,{childList:!0,subtree:!0});
