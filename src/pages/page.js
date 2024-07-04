@@ -6,7 +6,6 @@ export default class Page {
   }
 
   disconnect() {
-    console.log('Page: disconnect()', this._observers);
     this._observers.forEach(o => o.disconnect());
   }
 }
