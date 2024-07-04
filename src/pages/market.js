@@ -8,7 +8,8 @@ export default class MarketPage {
       if (marketContainer.querySelector('.customElement')) return;
 
       const setsLink = document.createElement('a');
-      setsLink.href = '/sets';
+      const gameSubdomain = window.ty.subdomain;
+      setsLink.href = `/${gameSubdomain}/sets`;
       setsLink.classList.add('customElement');
       setsLink.innerHTML = 'Sets';
 
