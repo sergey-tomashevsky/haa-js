@@ -1,4 +1,6 @@
-export default class MarketPage {
+import Page from './page';
+
+export default class MarketPage extends Page {
   run()  {
     const observer = new MutationObserver(() => {
       const marketContainer = document.getElementById('marketContainer');
