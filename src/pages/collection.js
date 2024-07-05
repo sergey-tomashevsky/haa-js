@@ -7,13 +7,18 @@ export default class CollectionPage extends Page {
       if (!libraryCards) return;
 
       // Skip updating if custom elements already exist.
-      if (libraryCards.querySelector('.customElement')) return;
+      if (libraryCards.querySelector('.customSelect')) return;
 
-      const newButton = document.createElement('div');
-      newButton.classList.add('button');
-      newButton.classList.add('customElement');
-      newButton.innerText = 'New custom button';
-      libraryCards.querySelector('header .filters').prepend(newButton);
+      const typeSelect = document.createElement('select');
+      typeSelect.classList.add('customSelect');
+      ['hero', 'unit', 'spell', 'equip'].forEach(type => {
+        const option = document.createElement('option');
+        option.text = type;
+        option.value = type;
+        typeSelect.add(option);
+      });
+
+      libraryCards.querySelector('header .filters').prepend(typeSelect);
     });
 
     const wrapper = document.getElementById('wrapper');
