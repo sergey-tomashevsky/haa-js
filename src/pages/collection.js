@@ -1,5 +1,13 @@
 import Page from "./page";
 
+const TYPE_OPTIONS = [
+  { text: 'placeholder', value: '' },
+  { text: 'hero', value: 'hero' },
+  { text: 'unit', value: 'unit' },
+  { text: 'spell', value: 'spell' },
+  { text: 'companion', value: 'equip' },
+]
+
 export default class CollectionPage extends Page {
   run() {
     const observer = new MutationObserver(() => {
@@ -11,10 +19,10 @@ export default class CollectionPage extends Page {
 
       const typeSelect = document.createElement('select');
       typeSelect.classList.add('customSelect');
-      ['hero', 'unit', 'spell', 'equip'].forEach(type => {
+      TYPE_OPTIONS.forEach((optionParams) => {
         const option = document.createElement('option');
-        option.text = type;
-        option.value = type;
+        option.text = optionParams.text;
+        option.value = optionParams.value;
         typeSelect.add(option);
       });
 
