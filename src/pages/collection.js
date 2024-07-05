@@ -1,11 +1,11 @@
 import Page from "./page";
 
 const TYPE_OPTIONS = [
-  { text: 'placeholder', value: '' },
-  { text: 'hero', value: 'hero' },
-  { text: 'unit', value: 'unit' },
-  { text: 'spell', value: 'spell' },
-  { text: 'companion', value: 'equip' },
+  { text: 'Type', value: '' },
+  { text: 'Hero', value: 'hero' },
+  { text: 'Unit', value: 'unit' },
+  { text: 'Spell', value: 'spell' },
+  { text: 'Companion', value: 'equip' },
 ]
 
 export default class CollectionPage extends Page {
