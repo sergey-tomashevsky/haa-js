@@ -26,6 +26,7 @@ export default class CardsPage extends Page {
 
         addStat('atk', cardInfo, properties, card.classList.contains('hero') || card.classList.contains('unit'));
         addStat('health', cardInfo, properties);
+        addStat('dur', cardInfo, properties);
         addStat('source', cardInfo, properties);
         addStat('reqSource', cardInfo, properties);
       });
