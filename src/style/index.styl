@@ -1,6 +1,7 @@
 // Welcome to the example CSS file for the template. CSS is a powerful styling tool that lets you customize the overall look and feel of your game. Dulst ships with DEFAULT CSS that forms the basis of every game, and every game can overwrite that default CSS with this file.
 
-@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap')
 
 /*
  * Options. Here we define some variables for the colors in our game. These variables will be used further down in the CSS.
@@ -2906,7 +2907,7 @@ body
   letter-spacing 2px
   line-height 1em
   border-radius 60px
-  cursor pointer
+  cursor pointer  
   font-size 10px
   margin 0
 
@@ -2922,16 +2923,19 @@ body
 // Deck builder screen
 // TODO: extract to separate file.
 
-#wrapper:has(#decksContainer)
+#wrapper:has(#decksContainer), #wrapper:has(#cardsList)
   overflow hidden
 
-#main:has(#decksContainer)
+#main:has(#decksContainer), #main:has(#cardsList)
   height calc(100vh - 80px)
   background-image url(https://hololive.hololivepro.com/wp-content/themes/hololive/images/fixed_bg.jpg)
   background-size cover
   background-repeat no-repeat
 
-#decksContainer
+#cardsList.page
+  padding-top 1.5rem
+
+#decksContainer.page, #cardsList.page
   height 100%
   display flex
   flex-direction column
@@ -2939,6 +2943,9 @@ body
   padding-bottom 1rem
 
   header.page
+    display none
+
+  .filters .sortBy
     display none
 
   &:before
@@ -3207,9 +3214,18 @@ body
         &:has(.mainCards .card[data-type="equip"]) footer li.equip
           display revert
 
-
   #libraryCards
     padding-left 0
+
+  #card-list-container
+    & > .mainCards h5
+    display flex
+
+    a.linkToTypeEdit
+      display flex
+      align-items center
+      i
+        line-height unset
 
     .cardsListSort
       h2
@@ -3234,7 +3250,7 @@ body
         display flex
         gap 2.5rem
         flex-wrap wrap
-        padding 0.5rem
+        padding 1rem
         padding-bottom 2rem
 
         .cardsListSort .cardStats h2
@@ -3356,69 +3372,69 @@ body
             & > *
               display none
 
-            div[data-name="health"], div[data-name="dur"], div[data-name="cost"]
+            div[data-name="health"], div[data-name="dur"], div[data-name="atk"]
+              display flex
               position absolute
               border-radius 50%
               background rgba(0, 0, 0, 0.8)
               color #fff
-              font-size 1.4em
+              font-family "Fjalla One", sans-serif
+              font-size 1.5rem
               font-weight bold
               line-height 1
-              width inherit
-              // box-shadow inset 0px 0px 0px 1px #000, inset -4px 4px 4px -3px #000, inset 4px -4px 4px -3px #000, inset 2px 2px 2px 0px #fff, inset -3px -3px 3px -2px #fff
               box-sizing border-box
-              display block
               width 2.5rem
               aspect-ratio 1
               overflow visible
               border 2px solid transparent
-              bottom -3%
-              right -3%
-              border-color healthColor
               display flex
               align-items center
               justify-content center
-              padding-top 2px
-              text-shadow 1px 1px black
+              padding-top 1px
+              text-shadow 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black
               box-shadow #000 3px 3px 8px
               z-index 1
 
             div[data-name="dur"]
               border-color durColor
+              bottom -3%
+              left -7%
+            div[data-name="health"]
+              border-color healthColor
+              bottom -3%
+              right -5%
+            div[data-name="atk"]
+              border-color atkColor
+              bottom -3%
+              left -7%
 
             div[data-name="cost"]
-              border-color costColor
-              top -3%
-              bottom unset
-              left -3%
-            div[data-name="cost"]:empty
-              display none
+              z-index 1
+              display flex
+              position absolute
+              align-items center
+              justify-content center
+              background url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i226k5fh_manaGem_polished_small_ver.png)
+              background-size cover
+              background-position center
+              background-repeat no-repeat
+              text-shadow 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black
+              color white
+              font-family "Fjalla One", sans-serif
+              font-size 1.5rem
+              font-weight bold
+              line-height 1
+              box-sizing border-box
+              width 2.7rem
+              aspect-ratio 1
+              top -4%
+              left -7%
+              filter drop-shadow(2px 2px 3px #000)
+              font-size 1.5rem
+              padding-top 0.1rem
 
-          &.unit .properties div[data-name="atk"], &.equip .properties div[data-name="atk"]
-            position absolute
-            border-radius 50%
-            background rgba(0, 0, 0, 0.8)
-            color #fff
-            font-size 1.4em
-            font-weight bold
-            line-height 1
-            width inherit
-            // box-shadow inset 0px 0px 0px 1px #000, inset -4px 4px 4px -3px #000, inset 4px -4px 4px -3px #000, inset 2px 2px 2px 0px #fff, inset -3px -3px 3px -2px #fff
-            box-sizing border-box
-            display block
-            width 2.5rem
-            aspect-ratio 1
-            overflow visible
-            border 2px solid transparent
-            bottom -3%
-            left -3%
-            border-color atkColor
-            display flex
-            align-items center
-            justify-content center
-            padding-top 2px
-            text-shadow 1px 1px black
-            box-shadow #000 3px 3px 8px
+              &:empty
+                display none
 
     .mainCards .list-container h5
       line-height 1.3
