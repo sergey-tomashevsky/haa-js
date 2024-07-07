@@ -24,7 +24,7 @@ export default class CardsPage extends Page {
           addStat('cost', cardInfo, properties);
         }
 
-        addStat('atk', cardInfo, properties);
+        addStat('atk', cardInfo, properties, card.classList.contains('hero') || card.classList.contains('unit'));
         addStat('health', cardInfo, properties);
         addStat('source', cardInfo, properties);
         addStat('reqSource', cardInfo, properties);
@@ -37,11 +37,13 @@ export default class CardsPage extends Page {
   }
 }
 
-function addStat(statName, cardInfo, container) {
+function addStat(statName, cardInfo, container, forceZeroIfNull = false) {
   if (cardInfo[statName] === undefined) return null;
 
   const stat = document.createElement('div');
-  const statValue = cardInfo[statName] || 0
+  if (!forceZeroIfNull && cardInfo[statName] === null) return;
+
+  const statValue = cardInfo[statName] || 0;
   stat.setAttribute('data-name', statName);
   stat.setAttribute('data-value', statValue + '');
   stat.classList.add('property');
