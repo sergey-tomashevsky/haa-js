@@ -24,9 +24,15 @@ export default class CardsPage extends Page {
           addStat('cost', cardInfo, properties);
         }
 
-        addStat('atk', cardInfo, properties, card.classList.contains('hero') || card.classList.contains('unit'));
-        addStat('health', cardInfo, properties);
-        addStat('dur', cardInfo, properties);
+        if (card.classList.contains('hero') || card.classList.contains('unit') || card.classList.contains('equip')) {
+          addStat('atk', cardInfo, properties, true);
+        }
+        if (card.classList.contains('hero') || card.classList.contains('unit')) {
+          addStat('health', cardInfo, properties);
+        }
+        if (card.classList.contains('equip')) {
+          addStat('dur', cardInfo, properties);
+        }
         addStat('source', cardInfo, properties);
         addStat('reqSource', cardInfo, properties);
       });
