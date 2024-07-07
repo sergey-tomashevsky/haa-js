@@ -26,6 +26,8 @@ export default class CardsPage extends Page {
 
         addStat('atk', cardInfo, properties);
         addStat('health', cardInfo, properties);
+        addStat('source', cardInfo, properties);
+        addStat('reqSource', cardInfo, properties);
       });
     });
 
@@ -36,7 +38,7 @@ export default class CardsPage extends Page {
 }
 
 function addStat(statName, cardInfo, container) {
-  if (cardInfo[statName] === undefined) return null;
+  if (cardInfo[statName] === undefined || cardInfo[statName] === null) return null;
 
   const stat = document.createElement('div');
   stat.setAttribute('data-name', statName);
