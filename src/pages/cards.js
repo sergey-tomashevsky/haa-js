@@ -19,16 +19,13 @@ export default class CardsPage extends Page {
         const cardInfo = cardsByIndex[card.getAttribute('data-cardid')];
         if (!cardInfo) return;
 
-        // Add card cost.
-        if (cardInfo.cost) {
-          const cost = document.createElement('div');
-          cost.setAttribute('data-name', 'cost');
-          cost.setAttribute('data-value', cardInfo.cost + '');
-          cost.classList.add('property');
-          cost.classList.add('mainProperty');
-          cost.innerText = cardInfo.cost;
-          properties.append(cost);
+        // Skip cost for heroes.
+        if (!card.classList.contains('hero')) {
+          addStat('cost', cardInfo, properties);
         }
+
+        addStat('atk', cardInfo, properties);
+        addStat('health', cardInfo, properties);
       });
     });
 
@@ -36,4 +33,16 @@ export default class CardsPage extends Page {
     observer.observe(wrapper, { childList: true, subtree: true });
     this._observers.push(observer);
   }
+}
+
+function addStat(statName, cardInfo, container) {
+  if (cardInfo[statName] === undefined) return null;
+
+  const stat = document.createElement('div');
+  stat.setAttribute('data-name', statName);
+  stat.setAttribute('data-value', cardInfo[statName] + '');
+  stat.classList.add('property');
+  stat.classList.add('mainProperty');
+  stat.innerText = cardInfo[statName];
+  container.append(stat);
 }
