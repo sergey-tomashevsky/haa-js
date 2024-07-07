@@ -1,8 +1,11 @@
-import { CollectionPage, MarketPage, SetsPage } from "./pages";
+import { CardsPage, CollectionPage, MarketPage, SetsPage } from "./pages";
 
 let currentPage;
 
 function executeRoute(url) {
+  if (url.includes('/cards')) {
+    currentPage = new CardsPage();
+  }
   if (url.includes('/decks')) {
     currentPage = new CollectionPage();
   }
