@@ -38,13 +38,14 @@ export default class CardsPage extends Page {
 }
 
 function addStat(statName, cardInfo, container) {
-  if (cardInfo[statName] === undefined || cardInfo[statName] === null) return null;
+  if (cardInfo[statName] === undefined) return null;
 
   const stat = document.createElement('div');
+  const statValue = cardInfo[statName] || 0
   stat.setAttribute('data-name', statName);
-  stat.setAttribute('data-value', cardInfo[statName] + '');
+  stat.setAttribute('data-value', statValue + '');
   stat.classList.add('property');
   stat.classList.add('mainProperty');
-  stat.innerText = cardInfo[statName];
+  stat.innerText = statValue;
   container.append(stat);
 }
