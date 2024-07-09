@@ -61,6 +61,45 @@ classColors = {
   All: rgb(255, 255, 255)
 }
 
+cardTitleColorRules = {
+  Banchou: {
+    backgroundColor: rgba(169, 50, 38, 0.8),
+    backgroundJoinColor: rgba(241, 148, 138, 0.3),
+    topBorderColor: #E74C3C,
+    bottomBorderColor: #922B21
+  },
+  Gunshi: {
+    backgroundColor: rgba(33, 97, 140, 0.8),
+    backgroundJoinColor: rgba(93, 173, 226, 0.3),
+    topBorderColor: #5DADE2,
+    bottomBorderColor: #1B4F72
+  },
+  Senshi: {
+    backgroundColor: rgba(202, 111, 30, 0.8),
+    backgroundJoinColor: rgba(240, 178, 122, 0.3),
+    topBorderColor: #F5B041,
+    bottomBorderColor: #AF601A
+  },
+  Idol: {
+    backgroundColor: rgba(244, 208, 63, 0.8),
+    backgroundJoinColor: rgba(252, 243, 207, 0.3),
+    topBorderColor: #F9E79F,
+    bottomBorderColor: #B7950B
+  },
+  Madoushi: {
+    backgroundColor: rgba(136, 78, 160, 0.8),
+    backgroundJoinColor: rgba(215, 189, 226, 0.3),
+    topBorderColor: #C987C9,
+    bottomBorderColor: #5B2C6F
+  },
+  Okashii: {
+    backgroundColor: rgba(34, 153, 84, 0.8),
+    backgroundJoinColor: rgba(249, 231, 159, 0.3),
+    topBorderColor: #7dff19,
+    bottomBorderColor: #229954
+  }
+}
+
 // Keywords. Keywords come from the secondary properties section of a card type. Check the admin/gameplay page to set them. If set on a card, they will show up in the card info preview.
 keywords = hidden, vanguard, rush, "last life", legacy, frenzy, snipe, knocked-back, sacrifice, shield, overload, "warmed up", synergy, conjure, combatant, elusive, defense, poison, lifesteal, cannotAttack, spellPower, echo, immune, duration, silence, gemini, counter, field, armor, twist, remain, haste, frozen, damageVulnerability, damageResistance, damageImmunity, storedPower, sturdy, heroic actions, Sturdy, burn, soulEater, timeshifted, spellGuard, soulsCollected, curse, soulLinked, cold, heated,  BurnHeal, BurnImmune, conjured, bless, unarchived, ExtraCounter
 
@@ -3342,30 +3381,18 @@ body
               padding-left 0.5rem
               text-align center
 
-          &:has(div[data-value*="Idol"]) .name
-            background linear-gradient(270deg, rgba(244, 208, 63, 0.8), rgba(252, 243, 207, 0.3), rgba(244, 208, 63, 0.8))
-            border-bottom-color: #B7950B
-            border-top-color: #F9E79F
-          &:has(div[data-value*="Senshi"]) .name
-            background linear-gradient(270deg, rgba(202, 111, 30, 0.8), rgba(240, 178, 122, 0.3), rgba(202, 111, 30, 0.8))
-            border-bottom-color: #AF601A
-            border-top-color: #F5B041
-          &:has(div[data-value*="Banchou"]) .name
-            background linear-gradient(270deg, rgba(169, 50, 38, 0.8), rgba(241, 148, 138, 0.3), rgba(169, 50, 38, 0.8))
-            border-bottom-color: #922B21
-            border-top-color: #E74C3C
-          &:has(div[data-value*="Gunshi"]) .name
-            background linear-gradient(270deg, rgba(33, 97, 140, 0.8), rgba(93, 173, 226, 0.3), rgba(33, 97, 140, 0.8))
-            border-bottom-color: #1B4F72
-            border-top-color: #5DADE2
-          &:has(div[data-value*="Madoushi"]) .name
-            background linear-gradient(270deg, rgba(136, 78, 160, 0.8), rgba(215, 189, 226, 0.3), rgba(136, 78, 160, 0.8))
-            border-bottom-color: #5B2C6F
-            border-top-color: #C987C9
-          &:has(div[data-value*="Okashii"]) .name
-            background linear-gradient(270deg, rgba(34, 153, 84, 0.8), rgba(249, 231, 159, 0.3), rgba(34, 153, 84, 0.8))
-            border-bottom-color: #229954
-            border-top-color: #7dff19
+          for key1, value1 in cardTitleColorRules
+            for key2, value2 in cardTitleColorRules
+              if key1 == key2
+                &:has(div[data-value=\"{key1}\"]) .name
+                  background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
+                  border-top-color: value1["topBorderColor"]
+                  border-bottom-color: value1["bottomBorderColor"]
+              else
+                &:has(div[data-value^=\"{key1}\"][data-value*=\"{key2}\"]) .name
+                  background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
+                  border-top-color: value1["topBorderColor"]
+                  border-bottom-color: value2["bottomBorderColor"]
 
           .properties
             display block
