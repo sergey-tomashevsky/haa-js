@@ -27,6 +27,10 @@ export default class CollectionPage extends Page {
       });
 
       libraryCards.querySelector('header .filters').prepend(typeSelect);
+
+      document.querySelectorAll('#libraryCards .card').forEach(card => {
+        card.classList.add('visible');
+      });
     });
 
     const wrapper = document.getElementById('wrapper');
