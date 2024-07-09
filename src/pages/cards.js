@@ -12,8 +12,8 @@ export default class CardsPage extends Page {
         properties.classList.add('properties');
         card.append(properties);
 
-        const cardImage = card.querySelector('img');
-        cardImage.setAttribute('loading', 'lazy');
+        // const cardImage = card.querySelector('img');
+        // cardImage.setAttribute('loading', 'lazy');
         card.classList.add('customElement');
 
         const cardInfo = cardsByIndex[card.getAttribute('data-cardid')];
