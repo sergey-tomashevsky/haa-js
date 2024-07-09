@@ -28,7 +28,7 @@ export default class CollectionPage extends Page {
 
       libraryCards.querySelector('header .filters').prepend(typeSelect);
 
-      document.querySelectorAll('#libraryCards .card').slice(0, 30).forEach(card => {
+      Array.from(document.querySelectorAll('#libraryCards .card')).slice(0, 30).forEach(card => {
         card.classList.add('visible');
       });
     });
