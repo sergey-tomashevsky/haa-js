@@ -3091,6 +3091,7 @@ body
         overflow hidden
         gap 0.5rem
         height unset
+        padding 0
 
         header
           order 1
@@ -3150,8 +3151,8 @@ body
           padding 0px 10px
           background #fff
           background-image linear-gradient(90deg, #707B7C, #E5E8E8)
-          border-bottom-left-radius 20px
-          border-top-left-radius 20px
+          border-bottom-left-radius 0.5rem
+          border-top-left-radius 0.5rem
           justify-content start
           transition visibility .3s
 
@@ -3197,8 +3198,43 @@ body
             text-shadow 1px 1px black
             transition letter-spacing .3s
 
-          &.hero .count
-            display none
+          &.hero
+            &:before
+              content ''
+              margin 0
+              background url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i2cghi8u_crown.png)
+              background-size 85% 100%
+              background-position center
+              background-repeat no-repeat
+              width 2.5rem
+              aspect-ratio 1
+              position absolute
+              top 0
+              left 1%
+              z-index 1
+              opacity 1
+              height auto
+              transform unset
+              filter drop-shadow(2px 2px 3px #000)
+            &:after
+              content ''
+              mask-image url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i2cghi8u_crown.png)
+              mask-size 85% 100%
+              mask-position center
+              mask-repeat no-repeat
+              width 2.5rem
+              aspect-ratio 1
+              background linear-gradient(0deg, gold, orange)
+              position absolute
+              top 0
+              left 1%
+              z-index 1
+              opacity 1
+              height auto
+              transform unset
+
+            .count
+              display none
 
           .count
             &:before
@@ -3225,28 +3261,29 @@ body
               display none
 
             div[data-name="cost"]
-              position absolute
-              border-radius 50%
-              background rgba(0, 0, 0, 0.8)
-              color #fff
-              font-size 1.4em
-              font-weight bold
-              line-height 1
-              width inherit
-              box-sizing border-box
-              display block
-              width 2.5rem
-              aspect-ratio 1
-              overflow visible
-              border 2px solid transparent
-              left 0
-              top 0
-              border-color costColor
+              z-index 1
               display flex
+              position absolute
               align-items center
               justify-content center
-              padding-top 2px
-              text-shadow 1px 1px black
+              background url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i226k5fh_manaGem_polished_small_ver.png)
+              background-size cover
+              background-position center
+              background-repeat no-repeat
+              text-shadow 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black
+              color white
+              font-family "Fjalla One", sans-serif
+              font-size 1.5rem
+              font-weight bold
+              line-height 1
+              box-sizing border-box
+              width 2.3rem
+              aspect-ratio 1
+              top 2%
+              left 1%
+              filter drop-shadow(2px 2px 3px #000)
+              font-size 1.3rem
+              padding-top 0.1rem
 
         &:has(.mainCards .card[data-type="unit"]) footer li.unit
           display revert
