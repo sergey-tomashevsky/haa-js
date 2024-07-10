@@ -15,6 +15,7 @@ export default class CardsPage extends Page {
         // const cardImage = card.querySelector('img');
         // cardImage.setAttribute('loading', 'lazy');
         card.classList.add('customElement');
+        card.classList.add('visible');
 
         const cardInfo = cardsByIndex[card.getAttribute('data-cardid')];
         if (!cardInfo) return;
