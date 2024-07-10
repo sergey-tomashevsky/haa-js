@@ -32,7 +32,7 @@ export default class CollectionPage extends Page {
 
       libraryCards.querySelector('header .filters').prepend(typeSelect);
 
-      applyTypeFilter(document.currentTypeFilter || 'hero');
+      applyTypeFilter(document.currentTypeFilter || '');
     });
 
     const wrapper = document.getElementById('wrapper');
@@ -44,7 +44,7 @@ export default class CollectionPage extends Page {
 function applyTypeFilter(type) {
   document.currentTypeFilter = type;
   document.querySelectorAll('#libraryCards .card').forEach((card) => {
-    if (card.classList.contains(type)) {
+    if (card.classList.contains(type) || type === '') {
       card.classList.add('visible');
     } else {
       card.classList.remove('visible');
