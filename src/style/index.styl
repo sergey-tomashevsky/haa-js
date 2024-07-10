@@ -3337,14 +3337,20 @@ body
       .popoverTarget
         display none
 
+    .filters
+      display flex
+      gap 1rem
+
     .mainCards
       overflow-y scroll
+      flex 1
 
       .list-container
         padding-right 1rem
+        display none !important
 
-        &:has(.card-list-container:empty)
-          display none
+        &:has(.card.visible)
+          display block !important
 
       .card-list-container
         display flex
@@ -3364,10 +3370,13 @@ body
           box-shadow #000 2px 2px 8px
           overflow unset
           border-radius 6px
-          display flex
+          display none
           align-items center
           justify-content center
-          transition: all 0.3s ease-in-out;
+          transition all 0.3s ease-in-out
+
+          &.visible
+            display flex
 
           &.countzero
             opacity 0.3
