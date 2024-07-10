@@ -25,16 +25,28 @@ export default class CollectionPage extends Page {
         option.value = optionParams.value;
         typeSelect.add(option);
       });
+      typeSelect.addEventListener('change', (event) => {
+        console.log('Type select change', event);
+        applyTypeFilter(event.target.value);
+      })
 
       libraryCards.querySelector('header .filters').prepend(typeSelect);
 
-      Array.from(document.querySelectorAll('#libraryCards .card')).slice(0, 30).forEach(card => {
-        card.classList.add('visible');
-      });
+      applyTypeFilter('hero');
     });
 
     const wrapper = document.getElementById('wrapper');
     observer.observe(wrapper, { childList: true, subtree: true });
     this._observers.push(observer);
   }
+}
+
+function applyTypeFilter(type) {
+  document.querySelectorAll('#libraryCards .card').forEach((card) => {
+    if (card.classList.contains(type)) {
+      card.classList.add('visible');
+    } else {
+      card.classList.remove('visible');
+    }
+  });
 }
