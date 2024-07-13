@@ -2,6 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap')
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap')
+@import url(https://db.onlinewebfonts.com/c/0a6ee448d1bd65c56f6cf256a7c6f20a?family=Bahnschrift)
 
 /*
  * Options. Here we define some variables for the colors in our game. These variables will be used further down in the CSS.
@@ -698,27 +699,181 @@ setNegativesToZero()
 
 .card-info-container.visible
   overflow visible
+
+// TODO: Move below?
+#cardFullInfo.hero
+.cardFullInfo.hero
+#cardFullInfo:has(.hero)
+.cardFullInfo:has(.hero)
+  .cardDisplayInner .name
+    &:before
+      content: '';
+      margin: 0;
+      background: url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i2cghi8u_crown.png);
+      background-size: 85% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 5rem;
+      aspect-ratio: 1;
+      position: absolute;
+      top: -1.7rem;
+      left: -2.5rem;
+      z-index: 1;
+      opacity: 1;
+      height: auto;
+      transform: unset;
+      filter: drop-shadow(1px 1px 6px #000);
+
+    &:after
+      content: '';
+      mask-image: url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i2cghi8u_crown.png);
+      mask-size: 85% 100%;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      width: 5rem;
+      aspect-ratio: 1;
+      background: linear-gradient(90deg, #ffd700, #ffa500);
+      position: absolute;
+      top: -1.7rem;
+      left: -2.5rem;
+      z-index: 1;
+      opacity: 1;
+      height: auto;
+      transform: unset;
+
 #cardFullInfo .cardDisplayInner
 .cardFullInfo .cardDisplayInner
   color #eee
 
+  .name
+    position absolute
+    z-index 1
+    width 90%
+    right 0
+    box-sizing border-box
+    top 0.5rem
+    padding 0.5rem 1rem
+    font-size larger
+    font-family "Yu Gothic Medium", sans-serif
+    text-align right
+    line-height 1
+    border-top 1px solid #a6acaf
+    border-bottom 1px solid #212f3c
+    border-radius 0
+    background linear-gradient(270deg, rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.4), rgba(33, 47, 60, 0.8))
+    text-shadow 1px 1px black, -1px 1px black, 1px -1px black, -1px -1px black
+
   .image, .video
     position relative
     border-bottom 2px solid #000
+
+    img
+      border-radius 0.75rem
+
     if MEDIACONTENT_INSET_SHADOWS
       &:after
-        box-shadow inset 0 0 30px 15px alpha(#000, 0.8)
         content ""
         display block
         height 100%
         position absolute
         top 0
         width 100%
+        border-radius 0.75rem
+        box-shadow inset 0 0 20px 8px rgba(0,0,0,0.8)
+        background linear-gradient(to top, rgba(0, 0, 0, .8), transparent 30%)
 
   .info
     position relative
 
+  .tooltip
+    padding 0.25rem 0.5rem
+    background rgba(0, 0, 0, .4)
+    border-radius 2rem
+    order 1
+    font-weight bold
+    border 1px solid black
+    line-height 1.2
+
+  .classes
+    display none
+
+  .individualClasses
+    display flex
+    font-size small
+    color black
+    text-shadow 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff
+    font-weight bold
+    gap 0.25rem
+
+    span:not(:last-child):after
+      content ','
+
   ul.dataPane
+    display flex
+    flex-direction column
+    position absolute
+    top 0
+    left 0
+    justify-content end
+    height: calc(100% + 44px)
+    width 100%
+
+    .secondaryProperties
+      font-size 16px
+      background none !important
+      margin 0
+      font-family 'Bahnschrift', sans-serif
+
+      .property
+        margin 0
+        padding 0
+        .title, &:after
+          font-family 'Bahnschrift', sans-serif
+          text-shadow 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff
+          color black !important
+
+    li.effect, li.desc
+      font-size 16px
+      left 1rem
+      width 100%
+      background none
+      color black
+      padding 0.5rem 1rem
+      padding-bottom 0
+      margin 0
+
+      .data
+        font-family 'Bahnschrift', sans-serif
+        display flex
+        flex-direction column
+        align-items center
+        justify-items center
+        color black
+        text-shadow 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff
+
+    li.effect
+      min-height 2rem
+      padding-top 0
+
+    li.desc
+      font-size 13px
+      .data
+        color white
+        text-shadow 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000
+
+    li.type
+      position absolute
+      background none
+      top: 2.5rem;
+      right: 0;
+      padding: 0.5rem;
+
+      .data
+        display flex
+        align-items center
+        gap 0.5rem
+        font-family "Yu Gothic Medium", sans-serif
+
     if OVERLAY_MAIN_PROPERTIES
       li
         .data
@@ -783,30 +938,79 @@ setNegativesToZero()
                 display none
 
         [data-name="cost"]
-          top 10px
-          left 10px
-          border 3px solid costColor
+          z-index 1
+          display flex
+          position absolute
+          align-items center
+          justify-content center
+          background url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i226k5fh_manaGem_polished_small_ver.png)
+          background-size cover
+          background-position center
+          background-repeat no-repeat
+          text-shadow 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000
+          color #fff
+          font-family "Fjalla One", sans-serif
+          font-size 1.5rem
+          font-weight bold
+          line-height 1
+          box-sizing border-box
+          width 4rem
+          aspect-ratio 1
+          top -1%
+          left -3%
+          filter drop-shadow(2px 2px 3px #000)
+          font-size 2.5rem
+          padding-top 0.5rem
+          border 0
         [data-name="atk"]
-          top 294px
-          left 10px
           border 3px solid atkColor
+          top unset
+          bottom -0.5rem
+          left -0.5rem
+          width 4rem
+          height 4rem
+          display flex
+          align-items center
+          justify-content center
+          font-family "Fjalla One", sans-serif
+          font-size 2.5rem
+          font-weight bold
+          line-height 1
+          filter drop-shadow(2px 2px 3px #000)
         [data-name="health"]
-          top 294px
-          right 10px
           border 3px solid healthColor
+          top unset
+          bottom -0.25rem
+          right -0.4rem
+          width 4rem
+          height 4rem
+          display flex
+          align-items center
+          justify-content center
+          font-family "Fjalla One", sans-serif
+          font-size 2.5rem
+          font-weight bold
+          line-height 1
+          margin 0
+          left unset
+          filter drop-shadow(2px 2px 3px #000)
         [data-name="dur"]
-          top 294px
-          right 10px
           border 3px solid durColor
+          top unset
+          bottom -0.5rem
+          right -0.4rem
+          width 4rem
+          height 4rem
+          display flex
+          align-items center
+          justify-content center
+          font-family "Fjalla One", sans-serif
+          font-size 2.5rem
+          font-weight bold
+          line-height 1
+          filter drop-shadow(2px 2px 3px #000)
         [data-name="reqSource"], [data-name="source"]
-          font-size 1em
-          font-weight 400
-          background none
-          bottom 12px
-          left 24px
-          text-transform capitalize
-          padding-left 0
-          padding-right 0
+          display none
 
     li.effect, li.rarity, li.description, li.desc, li.type
       .data
@@ -887,7 +1091,29 @@ setNegativesToZero()
             padding-right .25em
 
     li.rarity
-      text-align right
+      display flex
+      justify-content end
+      padding-right 4rem
+      font-size smaller
+      border-bottom-left-radius 0.75rem
+      border-bottom-right-radius 0.75rem
+      background black
+      border-top rgba(255, 255, 255, 0.3) solid 1px
+      margin-top 1rem
+
+      &:before
+        content: "";
+        display: unset
+        position: absolute;
+        width: 100px;
+        height: 29px;
+        bottom: 1.6rem;
+        background: black;
+        border-radius: 50%;
+        left: 6.3rem;
+        z-index: 0;
+        border-top: 1px solid grey;
+
       &[data-value="98"]
         .data, .name, .dataPane
         visibility hidden
@@ -913,25 +1139,6 @@ classStyles(c)
     border-bottom 2px solid c
     &:after
       box-shadow inset 0 0 30px 15px darken(alpha(c, 0.8), 80%)
-
-#cardFullInfo, .cardFullInfo
-  for key, value in classColors
-    .mainProperties
-      .data
-        [data-name=\"{key}\"]
-          color value !important
-
-    &[data-source=\"{key}\"], &[data-reqsource=\"{key}\"]
-      classStyles(value)
-      [data-name="source"]
-      [data-name="reqSource"]
-        .data
-          color value !important
-
-    for key2, value2 in classColors
-      unless key == key2
-        &[data-source*=\"{key}\"][data-source*=\"{key2}\"], &[data-reqsource*=\"{key}\"][data-reqsource*=\"{key2}\"]
-          classStyles(mix(value, value2 / 2))
 
 /*
  * Card Full Info Popup Styling END.
@@ -2899,35 +3106,41 @@ body
  * Leftover Code
  */
 
+// TODO: combine with collection page stylings.
 #cardFullInfo, .cardFullInfo
-  &[data-source^="All"], &[data-reqsource^="All"]
-    [data-name="source"]
-    [data-name="reqSource"]
-      text-indent -9999px
-      border-radius 0px !important
-      &:after
-        display inline !important
-        content "All"
+  for key1, value1 in cardTitleColorRules
+    for key2, value2 in cardTitleColorRules
+      if key1 == key2
+        &[data-source^=\"{key1}\"], &[data-reqsource^=\"{key1}\"]
+          .name
+            background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
+            border-top-color: value1["topBorderColor"]
+            border-bottom-color: value1["bottomBorderColor"]
+      else
+        &[data-source^=\"{key1}\"][data-source*=\"{key2}\"], &[data-reqsource^=\"{key1}\"][data-reqsource*=\"{key2}\"]
+          .name
+            background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
+            border-top-color: value1["topBorderColor"]
+            border-bottom-color: value2["bottomBorderColor"]
 
-#cardFullInfo, .cardFullInfo
-  for key, value in classColors
-    for key2, value2 in classColors
-      unless key == key2
-        &[data-source^=\"{key}\"][data-source*=\"{key2}\"], &[data-reqsource^=\"{key}\"][data-reqsource*=\"{key2}\"]
-          .name // Card Title
-            color value
-          .name   // Top Border
-            border-top 3px solid value
-            border-image linear-gradient(to right, value, value2) 1
-          .image, .video  // Bottom border
-            border-bottom 2px solid value
-            border-image linear-gradient(to right, value, value2) 1
+  // for key, value in classColors
+  //   for key2, value2 in classColors
+  //     unless key == key2
+  //       &[data-source^=\"{key}\"][data-source*=\"{key2}\"], &[data-reqsource^=\"{key}\"][data-reqsource*=\"{key2}\"]
+  //         .name // Card Title
+  //           color value
+  //         .name   // Top Border
+  //           border-top 3px solid value
+  //           border-image linear-gradient(to right, value, value2) 1
+  //         .image, .video  // Bottom border
+  //           border-bottom 2px solid value
+  //           border-image linear-gradient(to right, value, value2) 1
 
 .dataPane .desc .data {
   font-style italic
   font-size 0.9em
   cite {
-    float right
+    align-self end
   }
 }
 
@@ -3124,6 +3337,7 @@ body
                 display block
                 grid-column-start 1
                 grid-column-end 4
+                background unset
 
               &:before
                 content none
