@@ -17,6 +17,13 @@ export default class CollectionPage extends Page {
       // Skip updating if custom elements already exist.
       if (libraryCards.querySelector('.customSelect')) return;
 
+      document.querySelectorAll('#libraryCards .card').forEach(card => {
+        card.classList.add('visible');
+      });
+      return;
+
+      // TODO: filters temporary disabled until fixed.
+
       const typeSelect = document.createElement('select');
       typeSelect.classList.add('customSelect');
       TYPE_OPTIONS.forEach((optionParams) => {
