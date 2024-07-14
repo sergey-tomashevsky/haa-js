@@ -2682,6 +2682,21 @@ body[data-turnPlayer="player2"][data-playerNumber="player2"]
     &[data-location="opponent-playPreview"]
       opacity .3
 
+@keyframes floatingNumberAnim
+  0%
+    transform scale(0)
+    margin-top 0
+  10%
+    transform scale(1)
+    margin-top 0
+  90%
+    transform scale(1)
+    margin-top -2rem
+    opacity 1
+  100%
+    transform scale(1)
+    margin-top -2.2rem
+    opacity 0
 
 // Floating text. When main stats change on a card a popup appears.
 .card-change-value-container
@@ -2697,15 +2712,22 @@ body[data-turnPlayer="player2"][data-playerNumber="player2"]
     &.me-board
     &.opponent-board
     &.hero
+      animation unset
       display block
-    color white
-    border 1px solid healthColor
-    background alpha(healthColor, 75%)
-    padding 2rem
+      animation-name floatingNumberAnim
+      animation-duration 2s
+      animation-iteration-count 1
+    // TODO: constantize color
+    color rgb(255, 55, 55)
+    text-shadow 2px 2px black, -2px -2px black, -2px 2px black, 2px -2px black
+    font-family Rubik, sans-serif
+    background none
     label, .to
       display none
     .by
       display block
+      &:first-letter
+        font-size 0
     .arrow
       display none
 
@@ -2714,11 +2736,15 @@ body[data-turnPlayer="player2"][data-playerNumber="player2"]
     &.me-board
     &.opponent-board
     &.hero
+      animation unset
       display block
-    color white
-    border 1px solid healthColor
-    background alpha(rgb(125, 255, 25)75%)
-    padding 2rem
+      animation-name floatingNumberAnim
+      animation-duration 2s
+      animation-iteration-count 1
+    color rgba(30, 216, 83, 1)
+    text-shadow 2px 2px black, -2px -2px black, -2px 2px black, 2px -2px black
+    font-family Rubik, sans-serif
+    background none
     label, .to
       display none
     .by
