@@ -759,7 +759,7 @@ setNegativesToZero()
     right 0
     box-sizing border-box
     top 0.5rem
-    padding 0.5rem 1rem
+    padding 0.5rem 1rem 0.5rem 2rem
     font-size larger
     font-family "Yu Gothic Medium", sans-serif
     text-align right
@@ -859,7 +859,6 @@ setNegativesToZero()
         text-shadow 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff
 
     li.effect
-      min-height 2rem
       padding-top 0
 
     li.desc
@@ -1213,9 +1212,200 @@ classStyles(c)
  * Play Interface.
  */
 
+#selectCardsContainer .card
+  width 220px !important
+  height auto !important
+
+  &, .card-inner > img
+    border-radius 0.5rem
+
+  .card-inner:after
+    content ''
+    position: absolute
+    display block
+    border-radius 0.5rem
+    background-image linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0) 80%, rgba(19, 11, 43, 0.2) 88%, rgba(19, 11, 43, 0.4) 95%, rgba(19, 11, 43, 0.8) 100%)
+    width 100%
+    height 100%
+    z-index 1
+    top 0
+    left 0
+
+  .properties
+    display block
+    height 0
+
+    & > *
+      display none
+
+    div[data-name="name"]
+      display block
+      position absolute
+      color white
+      bottom unset
+      top 6px
+      width 100%
+      left unset
+      box-sizing border-box
+      text-shadow black 1px 1px
+      text-align right
+      right 0
+      font-size 14px
+      background linear-gradient(270deg, rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.4), rgba(33, 47, 60, 0.8))
+      padding 0.15rem 0.5rem
+      border-top 1px solid #A6ACAF
+      border-bottom 1px solid #212F3C
+      z-index 0
+      line-height 1.5
+      border-top-right-radius 2px
+      overflow hidden
+      white-space nowrap
+      text-overflow ellipsis
+      border-radius 0
+
+      p
+        display inline
+        &:before
+          content ' '
+
+    div[data-name="health"], div[data-name="dur"], div[data-name="atk"]
+      display flex
+      position absolute
+      border-radius 50%
+      background rgba(0, 0, 0, 0.8)
+      color #fff
+      font-family "Fjalla One", sans-serif
+      font-size 2.2rem
+      font-weight bold
+      line-height 1
+      box-sizing border-box
+      width 3.5rem
+      height auto
+      aspect-ratio 1
+      overflow visible
+      border 2px solid transparent
+      display flex
+      align-items center
+      justify-content center
+      padding-top 6px
+      text-shadow 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black
+      box-shadow #000 3px 3px 8px
+      z-index 2
+      top unset
+
+    div[data-name="dur"]
+      border-color durColor
+      bottom -3%
+      right -5%
+    div[data-name="health"]
+      border-color healthColor
+      bottom -3%
+      right -5%
+    div[data-name="atk"]
+      border-color atkColor
+      bottom -3%
+      left -6%
+
+    div[data-name="cost"]
+      border none
+      z-index 1
+      display flex
+      position absolute
+      align-items center
+      justify-content center
+      background url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i226k5fh_manaGem_polished_small_ver.png)
+      background-size cover
+      background-position center
+      background-repeat no-repeat
+      text-shadow 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black
+      color white
+      font-family "Fjalla One", sans-serif
+      font-weight bold
+      line-height 1
+      box-sizing border-box
+      width 3.5rem
+      aspect-ratio 1
+      top -4%
+      left -5%
+      filter drop-shadow(2px 2px 3px #000)
+      font-size 2.5rem
+      padding-top 0.5rem
+
+      &:empty
+        display none
+
+  &.hero div[data-name="atk"][data-value="0"]
+    display none
+
+  &:has(.properties .cost:empty), &.hero, &.draftPack
+    .name
+      padding-left 0.5rem
+      text-align center
+
+  for key1, value1 in cardTitleColorRules
+    for key2, value2 in cardTitleColorRules
+      if key1 == key2
+        &:has(div[data-value=\"{key1}\"]) .name
+          background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
+          border-top-color: value1["topBorderColor"]
+          border-bottom-color: value1["bottomBorderColor"]
+      else
+        &:has(div[data-value^=\"{key1}\"][data-value*=\"{key2}\"]) .name
+          background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
+          border-top-color: value1["topBorderColor"]
+          border-bottom-color: value2["bottomBorderColor"]
+
 #playContainer
   .card
     box-shadow none
+
+    .name
+      position absolute
+      color white
+      bottom unset
+      top 4px
+      width 100%
+      left unset
+      padding 0.25rem
+      box-sizing border-box
+      text-shadow black 1px 1px
+      text-align right
+      right 0
+      font-size 12px
+      background linear-gradient(270deg, rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.4), rgba(33, 47, 60, 0.8))
+      padding 0px 0.5rem 0 2.5rem
+      border-top 1px solid #A6ACAF
+      border-bottom 1px solid #212F3C
+      z-index 0
+      line-height 1.5
+      border-top-right-radius 2px
+      overflow hidden
+      white-space nowrap
+      text-overflow ellipsis
+      border-radius 0
+
+      p
+        display inline
+        &:before
+          content ' '
+
+    &:has(.properties .cost:empty), &.hero, &.draftPack
+      .name
+        padding-left 0.5rem
+        text-align center
+
+    for key1, value1 in cardTitleColorRules
+      for key2, value2 in cardTitleColorRules
+        if key1 == key2
+          &:has(div[data-value=\"{key1}\"]) .name
+            background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
+            border-top-color: value1["topBorderColor"]
+            border-bottom-color: value1["bottomBorderColor"]
+        else
+          &:has(div[data-value^=\"{key1}\"][data-value*=\"{key2}\"]) .name
+            background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
+            border-top-color: value1["topBorderColor"]
+            border-bottom-color: value2["bottomBorderColor"]
 
     .property
       setNegativesToZero()
@@ -1229,7 +1419,7 @@ classStyles(c)
         z-index 1
         overflow hidden
 
-      &[data-name="cost"], &[data-name="atk"], &[data-name="health"], &[data-name="dur"]
+      &[data-name="atk"], &[data-name="health"], &[data-name="dur"]
         statStyles()
         box-sizing border-box
         background rgba(0,0,0,0.75)
@@ -1253,9 +1443,29 @@ classStyles(c)
           text-shadow 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black
 
       &[data-name="cost"]
-        top .5rem
-        left .5rem
-        border-color costColor
+        z-index 1
+        display flex
+        position absolute
+        align-items center
+        justify-content center
+        background url(https://d2t4fc8ff77neh.cloudfront.net/cardSrcMedia/1i226k5fh_manaGem_polished_small_ver.png)
+        background-size cover
+        background-position center
+        background-repeat no-repeat
+        text-shadow 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black
+        color white
+        font-family "Fjalla One", sans-serif
+        font-size 1.5rem
+        font-weight bold
+        line-height 1
+        box-sizing border-box
+        width 2.5rem
+        aspect-ratio 1
+        top -4%
+        left -8%
+        filter drop-shadow(2px 2px 3px #000)
+        font-size 1.5rem
+        padding-top 0.1rem
 
       &[data-name="atk"]
         bottom 0
@@ -1667,8 +1877,11 @@ classStyles(c)
 
     &[data-location="me-hand"]
     &[data-location="opponent-hand"]
+      .name
+        display block
       .property[data-name="atk"]
       .property[data-name="health"]
+      .property[data-name="dur"]
         display none
       &[data-echoCopy="1"]
         .property[data-name="echoCopy"]
@@ -3690,6 +3903,11 @@ body
             z-index 0
             line-height 1.5
             border-top-right-radius 2px
+
+            p
+              display inline
+              &:before
+                content ' '
 
           &:has(.properties .cost:empty), &.hero, &.draftPack
             .name
