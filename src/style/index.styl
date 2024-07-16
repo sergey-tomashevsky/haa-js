@@ -1099,13 +1099,15 @@ setNegativesToZero()
     li.rarity
       display flex
       justify-content end
-      padding-right 4rem
       font-size smaller
       border-bottom-left-radius 0.75rem
       border-bottom-right-radius 0.75rem
       background black
       border-top rgba(255, 255, 255, 0.3) solid 1px
       margin-top 1rem
+
+      .data
+        z-index 1
 
       &:before
         content: "";
@@ -1128,6 +1130,9 @@ setNegativesToZero()
           -webkit-background-clip text
           -webkit-text-fill-color transparent
           visibility visible
+  &.hero, &.unit, &.equip
+    li.rarity
+      padding-right 4rem
 
 // Don't show the keywords help for the reqSource and source properties. The helptext for these properties are only for developers and not players.
 .keywords-help
