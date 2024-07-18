@@ -2,7 +2,7 @@ import Page from "./pages/page";
 
 export default class FullCardInfoUpdater extends Page {
   run() {
-    const cardInfoContainer = document.querySelector('.card-info-container.popup');
+    const cardInfoContainer = document.querySelector('.card-info-container.popup:not(.customElement)');
     if (!cardInfoContainer) {
       console.error('cardInfoContainer was not found');
       return;
@@ -10,6 +10,7 @@ export default class FullCardInfoUpdater extends Page {
 
     const fullCardInfoObserver = new MutationObserver(() => {
       console.log('cardInfoContainer updated');
+      cardInfoContainer.classList.add('customElement');
       const nameContainer = cardInfoContainer.querySelector('.name');
 
       const nameClone = nameContainer.cloneNode(true);
@@ -29,7 +30,7 @@ export default class FullCardInfoUpdater extends Page {
       console.log('finished');
     });
 
-    fullCardInfoObserver.observe(cardInfoContainer, { childList: true, subtree: true });
+    fullCardInfoObserver.observe(cardInfoContainer, { childList: true });
     this._observers.push(fullCardInfoObserver);
     console.log('fullCardInfoObserver started');
   }
