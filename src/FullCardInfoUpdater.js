@@ -21,7 +21,7 @@ export default class FullCardInfoUpdater extends Page {
       nameContainer.parentElement.append(nameClone);
       let fontSize =
         parseFloat(window.getComputedStyle(nameContainer).getPropertyValue('font-size'));
-      while (nameContainer.clientWidth < nameClone.clientWidth) {
+      while (nameContainer.clientWidth < nameClone.clientWidth || nameContainer.clientHeight < nameClone.clientHeight) {
         fontSize -= 1;
         nameClone.style.fontSize = fontSize + 'px';
       }

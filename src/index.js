@@ -30,3 +30,4 @@ window.navigation.addEventListener("navigate", (event) => {
 });
 
 executeRoute(window.location.href);
+fullCardInfoUpdater.run();
