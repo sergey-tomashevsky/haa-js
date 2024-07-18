@@ -3816,10 +3816,10 @@ body
 
       .list-container
         padding-right 1rem
-        display none !important
+        // display none !important
 
-        &:has(.card.visible)
-          display block !important
+        // &:has(.card.visible)
+        //   display block !important
 
       .card-list-container
         display flex
@@ -3839,13 +3839,14 @@ body
           box-shadow #000 2px 2px 8px
           overflow unset
           border-radius 6px
-          display none
+          // display none
+          display flex
           align-items center
           justify-content center
           transition all 0.3s ease-in-out
 
-          &.visible
-            display flex
+          // &.visible
+          //   display flex
 
           &.countzero
             opacity 0.3
