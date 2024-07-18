@@ -7,7 +7,9 @@ export default class FullCardInfoUpdater extends Page {
       if (!cardInfoContainer) return;
 
       observer.disconnect();
+      console.log('pageObserver disconnect');
       const fullCardInfoObserver = new MutationObserver(() => {
+        console.log('cardInfoContainer updated');
         const nameContainer = cardInfoContainer.querySelector('.name');
 
         const nameClone = nameContainer.cloneNode(true);
@@ -24,13 +26,16 @@ export default class FullCardInfoUpdater extends Page {
         }
         nameContainer.style.fontSize = fontSize + 'px';
         nameClone.remove();
+        console.log('finished');
       });
 
       fullCardInfoObserver.observe(cardInfoContainer, { childList: true, subtree: true });
       this._observers.push(observer);
+      console.log('fullCardInfoObserver started');
     });
 
     const wrapper = document.getElementById('wrapper');
     pageObserver.observe(wrapper, { childList: true, subtree: true });
+    console.log('page observer started');
   }
 }
