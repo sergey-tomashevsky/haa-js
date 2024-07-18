@@ -21,11 +21,11 @@ export default class FullCardInfoUpdater extends Page {
       nameContainer.parentElement.append(nameClone);
       let fontSize =
         parseFloat(window.getComputedStyle(nameContainer).getPropertyValue('font-size'));
-      while (nameContainer.clientWidth < nameClone.clientWidth || nameContainer.clientHeight > nameClone.clientHeight) {
+      while ((nameContainer.clientWidth < nameClone.clientWidth || nameContainer.clientHeight > nameClone.clientHeight) && fontSize >= 1) {
         fontSize -= 1;
         nameClone.style.fontSize = fontSize + 'px';
+        nameContainer.style.fontSize = fontSize + 'px';
       }
-      nameContainer.style.fontSize = fontSize + 'px';
       nameClone.remove();
       console.log('finished');
     });
