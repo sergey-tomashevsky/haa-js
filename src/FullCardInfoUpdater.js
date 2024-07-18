@@ -1,3 +1,5 @@
+import Page from "./pages/page";
+
 export default class FullCardInfoUpdater extends Page {
   run() {
     const pageObserver = new MutationObserver((_, observer) => {
