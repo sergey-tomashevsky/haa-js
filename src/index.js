@@ -1,6 +1,8 @@
+import FullCardInfoUpdater from "./FullCardInfoUpdater";
 import { CardsPage, CollectionPage, MarketPage, SetsPage } from "./pages";
 
 let currentPage;
+const fullCardInfoUpdater = new FullCardInfoUpdater();
 
 function executeRoute(url) {
   if (url.includes('/cards')) {
@@ -21,8 +23,10 @@ function executeRoute(url) {
 
 window.navigation.addEventListener("navigate", (event) => {
   if (currentPage) currentPage.disconnect();
+  fullCardInfoUpdater.disconnect();
   currentPage = null;
   executeRoute(event.destination.url);
+  fullCardInfoUpdater.run();
 });
 
 executeRoute(window.location.href);
