@@ -30,7 +30,7 @@ export default class FullCardInfoUpdater extends Page {
     });
 
     fullCardInfoObserver.observe(cardInfoContainer, { childList: true, subtree: true });
-    this._observers.push(observer);
+    this._observers.push(fullCardInfoObserver);
     console.log('fullCardInfoObserver started');
   }
 }
