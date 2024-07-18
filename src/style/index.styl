@@ -828,29 +828,16 @@ setNegativesToZero()
     height: calc(100% + 44px)
     width 100%
 
-    .secondaryProperties
-      font-size 16px
-      background none !important
-      margin 0
-      font-family 'Bahnschrift', sans-serif
-
-      .property
-        margin 0
-        padding 0
-        .title, &:after
-          font-family 'Bahnschrift', sans-serif
-          text-shadow 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff
-          color black !important
 
     li.effect, li.desc
-      font-size 16px
-      left 1rem
-      width 100%
-      background none
-      color black
-      padding 0.5rem 1rem
-      padding-bottom 0
-      margin 0
+      font-size 15px
+      width auto
+      background rgba(0,0,0,.5)
+      padding 0.5rem
+      margin 0 0.5rem
+      border 1px solid rgba(255,255,255,.6)
+      background linear-gradient(270deg, transparent, rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.4), rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.8), transparent)
+      border-image linear-gradient(to right, transparent, #212f3c, #a6acaf, #212f3c, transparent) 1
 
       .data
         font-family 'Bahnschrift', sans-serif
@@ -858,17 +845,17 @@ setNegativesToZero()
         flex-direction column
         align-items center
         justify-items center
-        color black
-        text-shadow 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff
-
-    li.effect
-      padding-top 0
-
-    li.desc
-      font-size 13px
-      .data
         color white
         text-shadow 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000
+
+    .secondaryProperties:not(:empty) + li.effect,
+    .secondaryProperties:not(:empty) + li.desc,
+    li.effect + li.desc
+      padding-top 0
+      border-top none
+
+    li.desc
+      font-size 12px
 
     li.type
       position absolute
@@ -947,6 +934,7 @@ setNegativesToZero()
                 display none
 
         [data-name="cost"]
+          overflow visible
           z-index 1
           display flex
           position absolute
@@ -972,6 +960,7 @@ setNegativesToZero()
           padding-top 0.5rem
           border 0
         [data-name="atk"]
+          overflow visible
           border 3px solid atkColor
           top unset
           bottom -0.5rem
@@ -987,9 +976,10 @@ setNegativesToZero()
           line-height 1
           filter drop-shadow(2px 2px 3px #000)
         [data-name="health"]
+          overflow visible
           border 3px solid healthColor
           top unset
-          bottom -0.25rem
+          bottom -0.4rem
           right -0.4rem
           width 4rem
           height 4rem
@@ -1004,6 +994,7 @@ setNegativesToZero()
           left unset
           filter drop-shadow(2px 2px 3px #000)
         [data-name="dur"]
+          overflow visible
           border 3px solid durColor
           top unset
           bottom -0.5rem
@@ -1029,12 +1020,31 @@ setNegativesToZero()
         display none
       text-align center
     .secondaryProperties
+      flex-wrap wrap
+      gap 0.1rem
+      justify-content center
       overflow hidden
-      padding 0 19.5px
-      background rgba(0,0,0,.4)
-      margin 0
+      margin 0 0.5rem
+      padding 0.5rem
       box-sizing border-box
       text-align center
+      background linear-gradient(270deg, transparent, rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.4), rgba(33, 47, 60, 0.8), rgba(33, 47, 60, 0.8), transparent)
+      border 1px solid rgba(255,255,255,0.6)
+      border-image linear-gradient(to right, transparent, #212f3c, #a6acaf, #212f3c, transparent) 1
+
+      &:not(:empty)
+        display flex
+
+      .property
+        margin 0
+        padding 0
+        display flex
+        align-items center
+        justify-content center
+        .title, &:after
+          font-size 15px !important
+          font-family 'Bahnschrift', sans-serif !important
+          text-shadow 1px 1px 0 black, -1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black
 
       // there are some properties that are for internal or UI purposes only, not meant to be displayed.
       li
@@ -1107,7 +1117,7 @@ setNegativesToZero()
       border-bottom-right-radius 0.75rem
       background black
       border-top rgba(255, 255, 255, 0.3) solid 1px
-      margin-top 1rem
+      margin-top 1.25rem
 
       .data
         z-index 1
@@ -1136,6 +1146,14 @@ setNegativesToZero()
   &.hero, &.unit, &.equip
     li.rarity
       padding-right 4rem
+
+  &:has(ul.dataPane li.desc) ul.dataPane .secondaryProperties,
+  &:has(ul.dataPane li.desc) ul.dataPane li.effect
+    padding-bottom 0.25rem
+    border-bottom none
+  &:has(ul.dataPane li.effect) ul.dataPane .secondaryProperties
+    border-bottom none
+    padding-bottom 0
 
 // Don't show the keywords help for the reqSource and source properties. The helptext for these properties are only for developers and not players.
 .keywords-help
@@ -1353,15 +1371,27 @@ classStyles(c)
   for key1, value1 in cardTitleColorRules
     for key2, value2 in cardTitleColorRules
       if key1 == key2
-        &:has(div[data-value=\"{key1}\"]) .name
-          background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
-          border-top-color: value1["topBorderColor"]
-          border-bottom-color: value1["bottomBorderColor"]
+        &:has(div[data-value=\"{key1}\"])
+          .name
+            background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
+            border-top-color: value1["topBorderColor"]
+            border-bottom-color: value1["bottomBorderColor"]
+          ul.dataPane
+            .secondaryProperties
+            li.effect
+            li.desc
+              border-image: linear-gradient(to right, transparent, value1["bottomBorderColor"], value1["topBorderColor"], value1["bottomBorderColor"], transparent) 1
       else
-        &:has(div[data-value^=\"{key1}\"][data-value*=\"{key2}\"]) .name
-          background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
-          border-top-color: value1["topBorderColor"]
-          border-bottom-color: value2["bottomBorderColor"]
+        &:has(div[data-value^=\"{key1}\"][data-value*=\"{key2}\"])
+          .name
+            background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
+            border-top-color: value1["topBorderColor"]
+            border-bottom-color: value2["bottomBorderColor"]
+          ul.dataPane
+            .secondaryProperties
+            li.effect
+            li.desc
+              border-image: linear-gradient(to right, transparent, value1["backgroundColor"], value1["backgroundColor"], value2["backgroundColor"], value2["backgroundColor"], transparent) 1
 
 #playContainer
   .card
@@ -1405,15 +1435,27 @@ classStyles(c)
     for key1, value1 in cardTitleColorRules
       for key2, value2 in cardTitleColorRules
         if key1 == key2
-          &:has(div[data-value=\"{key1}\"]) .name
-            background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
-            border-top-color: value1["topBorderColor"]
-            border-bottom-color: value1["bottomBorderColor"]
+          &:has(div[data-value=\"{key1}\"])
+            .name
+              background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
+              border-top-color: value1["topBorderColor"]
+              border-bottom-color: value1["bottomBorderColor"]
+
+            ul.dataPane .secondaryProperties
+            ul.dataPane li.effect
+            ul.dataPane li.desc
+              border-image: linear-gradient(to right, transparent, value1["bottomBorderColor"], value1["topBorderColor"], value1["bottomBorderColor"], transparent) 1
         else
-          &:has(div[data-value^=\"{key1}\"][data-value*=\"{key2}\"]) .name
-            background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
-            border-top-color: value1["topBorderColor"]
-            border-bottom-color: value2["bottomBorderColor"]
+          &:has(div[data-value^=\"{key1}\"][data-value*=\"{key2}\"])
+            .name
+              background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
+              border-top-color: value1["topBorderColor"]
+              border-bottom-color: value2["bottomBorderColor"]
+
+            ul.dataPane .secondaryProperties
+            ul.dataPane li.effect
+            ul.dataPane li.desc
+              border-image: linear-gradient(to right, transparent, value1["backgroundColor"], value1["backgroundColor"], value2["backgroundColor"], value2["backgroundColor"], transparent) 1
 
     .property
       setNegativesToZero()
@@ -3371,12 +3413,22 @@ body
             background: linear-gradient(270deg, value1["backgroundColor"], value1["backgroundJoinColor"], value1["backgroundColor"])
             border-top-color: value1["topBorderColor"]
             border-bottom-color: value1["bottomBorderColor"]
+
+          ul.dataPane .secondaryProperties
+          ul.dataPane li.effect
+          ul.dataPane li.desc
+            border-image: linear-gradient(to right, transparent, value1["bottomBorderColor"], value1["topBorderColor"], value1["bottomBorderColor"], transparent) 1
       else
         &[data-source^=\"{key1}\"][data-source*=\"{key2}\"], &[data-reqsource^=\"{key1}\"][data-reqsource*=\"{key2}\"]
           .name
             background: linear-gradient(90deg, value1["backgroundColor"], rgba(255,255,255,0.3), value2["backgroundColor"])
             border-top-color: value1["topBorderColor"]
             border-bottom-color: value2["bottomBorderColor"]
+
+          ul.dataPane .secondaryProperties
+          ul.dataPane li.effect
+          ul.dataPane li.desc
+            border-image: linear-gradient(to right, transparent, value1["backgroundColor"], value1["backgroundColor"], value2["backgroundColor"], value2["backgroundColor"], transparent) 1
 
   // for key, value in classColors
   //   for key2, value2 in classColors
