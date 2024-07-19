@@ -3,9 +3,9 @@ import Page from './page';
 
 export default class CardsPage extends Page {
   run()  {
-    updateFullCardPreview();
-
     const observer = new MutationObserver((mutation) => {
+      updateFullCardPreview();
+
       const cardsContainer = document.getElementById('cardsList');
       if (!cardsContainer) return;
 
@@ -49,6 +49,7 @@ export default class CardsPage extends Page {
 }
 
 function updateFullCardPreview() {
+  console.log('updateFullCardPreview()');
   const fullCardPreviewContainer = document.getElementById('card-properties');
   if (!fullCardPreviewContainer) return;
 
