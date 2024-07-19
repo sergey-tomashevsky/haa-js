@@ -50,7 +50,6 @@ export default class CardsPage extends Page {
 
 function updateFullCardPreview() {
   const observer = new MutationObserver(() => {
-    console.log('updateFullCardPreview observed mutation');
     const fullCardPreviewContainer = document.getElementById('card-properties');
     if (!fullCardPreviewContainer) return;
 
