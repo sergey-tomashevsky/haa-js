@@ -3,9 +3,9 @@ import Page from './page';
 
 export default class CardsPage extends Page {
   run()  {
-    const observer = new MutationObserver((mutation) => {
-      updateFullCardPreview();
+    updateFullCardPreview();
 
+    const observer = new MutationObserver(() => {
       const cardsContainer = document.getElementById('cardsList');
       if (!cardsContainer) return;
 
@@ -49,11 +49,15 @@ export default class CardsPage extends Page {
 }
 
 function updateFullCardPreview() {
-  console.log('updateFullCardPreview()');
-  const fullCardPreviewContainer = document.getElementById('card-properties');
-  if (!fullCardPreviewContainer) return;
+  const observer = new MutationObserver(() => {
+    console.log('updateFullCardPreview observed mutation');
+    const fullCardPreviewContainer = document.getElementById('card-properties');
+    if (!fullCardPreviewContainer) return;
 
-  fixCardNameFontSize(fullCardPreviewContainer);
+    fixCardNameFontSize(fullCardPreviewContainer);
+  });
+
+  observer.observe(document.body, { childList: true });
 }
 
 function addStat(statName, cardInfo, container, forceZeroIfNull = false) {
