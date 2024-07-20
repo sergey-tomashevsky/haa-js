@@ -23,10 +23,9 @@ function executeRoute(url) {
 
 window.navigation.addEventListener("navigate", (event) => {
   if (currentPage) currentPage.disconnect();
-  fullCardInfoUpdater.disconnect();
   currentPage = null;
   executeRoute(event.destination.url);
-  fullCardInfoUpdater.run();
 });
 
 executeRoute(window.location.href);
+fullCardInfoUpdater.run();

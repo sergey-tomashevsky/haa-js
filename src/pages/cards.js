@@ -1,8 +1,11 @@
+import fixCardNameFontSize from '../utils/fixCardNameFontSize';
 import Page from './page';
 
 export default class CardsPage extends Page {
   run()  {
-    const observer = new MutationObserver((mutation) => {
+    updateFullCardPreview();
+
+    const observer = new MutationObserver(() => {
       const cardsContainer = document.getElementById('cardsList');
       if (!cardsContainer) return;
 
@@ -43,6 +46,17 @@ export default class CardsPage extends Page {
     observer.observe(wrapper, { childList: true, subtree: true });
     this._observers.push(observer);
   }
+}
+
+function updateFullCardPreview() {
+  const observer = new MutationObserver(() => {
+    const fullCardPreviewContainer = document.getElementById('card-properties');
+    if (!fullCardPreviewContainer) return;
+
+    fixCardNameFontSize(fullCardPreviewContainer);
+  });
+
+  observer.observe(document.body, { childList: true });
 }
 
 function addStat(statName, cardInfo, container, forceZeroIfNull = false) {
