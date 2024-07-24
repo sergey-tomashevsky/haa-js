@@ -1472,24 +1472,20 @@ classStyles(c)
 
       &[data-name="atk"], &[data-name="health"], &[data-name="dur"]
         statStyles()
+        font-family "Fjalla One", sans-serif
         box-sizing border-box
         background rgba(0,0,0,0.75)
         padding 0.2em 0.4em
-        display block
+        display flex !important
+        justify-content center
         width 1.6em
         aspect-ratio 1
         overflow visible
         border 2px solid transparent
 
         .data
-          width 140%
-          height 140%
-          position absolute
-          transform translate(50%, 50%)
-          top -78%
-          left -90%
           text-align center
-          line-height 1.65
+          line-height 1.1
           font-weight bold
           text-shadow 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black
 
