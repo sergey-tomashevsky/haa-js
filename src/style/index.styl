@@ -2077,6 +2077,10 @@ classStyles(c)
     &[data-location="opponent-board1"]  .card-inner
     &[data-location="opponent-board2"]  .card-inner
     &[data-location="opponent-board3"]  .card-inner
+    &[data-location="me-board"]
+    &[data-location="me-board1"]
+    &[data-location="me-board2"]
+    &[data-location="me-board3"]
     &[data-location="me-board"] .card-inner
     &[data-location="me-board1"] .card-inner
     &[data-location="me-board2"] .card-inner
@@ -2113,6 +2117,10 @@ classStyles(c)
     &[data-location="opponent-board2"]
     &[data-location="me-board3"]
     &[data-location="opponent-board3"]
+      // Reset top level pseudo-elements if card has .card-inner.
+      &:has(.card-inner)
+        &:before, &:after
+          content none
 
       .media-content
         unitShape()
