@@ -3695,10 +3695,10 @@ body
             img
               width 65%
             .name
-              letter-spacing 1px
+              letter-spacing 0.5px
 
           &:has(div[data-value="Idol"])
-            background-image linear-gradient(90deg, #F4D03F, #FCF3CF)
+            background-image linear-gradient(90deg, rgb(244, 208, 63), #FCF3CF)
           &:has(div[data-value*="Senshi"])
             background-image linear-gradient(90deg, #CA6F1E, #F0B27A)
           &:has(div[data-value*="Banchou"])
@@ -3793,8 +3793,9 @@ body
             font-family "Yu Gothic Medium", sans-serif
             color white
             z-index 1
-            text-shadow 1px 1px black
+            text-shadow 1px 1px rgba(0,0,0,.7), -1px 1px rgba(0,0,0,.7), 1px -1px rgba(0,0,0,.7), -1px -1px rgba(0,0,0,.7)
             transition letter-spacing .3s
+            padding-left 2px
 
           &.hero
             &:before
