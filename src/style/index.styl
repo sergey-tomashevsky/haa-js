@@ -1012,6 +1012,17 @@ setNegativesToZero()
           filter drop-shadow(2px 2px 3px #000)
         [data-name="reqSource"], [data-name="source"]
           display none
+        [data-name="expansion"]
+          width 100%
+          background none
+          font-family 'Rubik', sans-serif
+          font-size x-small
+          font-weight normal
+          bottom 0.7rem
+          display flex
+          justify-content center
+          .data
+            color #E5E7E9
 
     li.effect, li.rarity, li.description, li.desc, li.type
       .data
@@ -1112,29 +1123,33 @@ setNegativesToZero()
 
     li.rarity
       display flex
-      justify-content end
-      font-size smaller
+      justify-content center
+      font-family 'Rubik', sans-serif
+      font-size 12px
+      line-height 1.2rem
       border-bottom-left-radius 0.75rem
       border-bottom-right-radius 0.75rem
       background black
       border-top rgba(255, 255, 255, 0.3) solid 1px
       margin-top 1.25rem
+      padding 1.5rem
+      padding-top 0
 
       .data
         z-index 1
 
       &:before
-        content: "";
-        display: unset
-        position: absolute;
-        width: 100px;
-        height: 29px;
-        bottom: 1.6rem;
-        background: black;
-        border-radius: 50%;
-        left: 6.3rem;
-        z-index: 0;
-        border-top: 1px solid grey;
+        content ""
+        display unset
+        position absolute
+        width 100px
+        height 29px
+        bottom 1.6rem
+        background black
+        border-radius 50%
+        left 6.3rem
+        z-index 0
+        border-top 1px solid grey
 
       &[data-value="98"]
         .data, .name, .dataPane
@@ -3150,57 +3165,73 @@ body:not([achievement-tutorial_win="1"])
   uncollectible = 101
   for value in uncollectible
     &[data-value=\"{value}\"]
+      &:after
+        content "Divine"
+        background: rgba(0,255,255,1)
+        font-weight bold
+        -webkit-background-clip text
+        -webkit-text-fill-color transparent
+        visibility visible
+        position: absolute;
       .data
-        visibility hidden
-        &:after
-          content "Divine"
-          background: rgba(0,255,255,1)
-          font-weight bold
-          -webkit-background-clip text
-          -webkit-text-fill-color transparent
-          visibility visible
+        width: 0;
+        overflow: hidden;
+        height: 1.2rem;
 
+.cardFullInfo .cardDisplayInner ul.dataPane li.rarity
 #cardFullInfo .cardDisplayInner ul.dataPane li.rarity
   Legendary = 80
   for value in Legendary
     &[data-value=\"{value}\"]
+      &:after
+        content "Legendary"
+        background rgba(255,150,0,1)
+        font-weight bold
+        -webkit-background-clip text
+        -webkit-text-fill-color transparent
+        visibility visible
+        position: absolute;
+
       .data
-        visibility hidden
-        &:after
-          content "Legendary"
-          background rgba(255,150,0,1)
+        width: 0;
+        overflow: hidden;
+        height: 1.2rem;
 
-          font-weight bold
-          -webkit-background-clip text
-          -webkit-text-fill-color transparent
-          visibility visible
-
+.cardFullInfo .cardDisplayInner ul.dataPane li.rarity
 #cardFullInfo .cardDisplayInner ul.dataPane li.rarity
   Epic = 60
   for value in Epic
     &[data-value=\"{value}\"]
+      &:after
+        content "Epic"
+        background rgba(200,50,255,1)
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
+        visibility visible
+        position absolute
       .data
-        visibility hidden
-        &:after
-          content "Epic"
-          background rgba(200,50,255,1)
-          -webkit-background-clip: text
-          -webkit-text-fill-color: transparent
-          visibility visible
+        width: 0;
+        overflow: hidden;
+        height: 1.2rem;
 
+.cardFullInfo .cardDisplayInner ul.dataPane li.rarity
 #cardFullInfo .cardDisplayInner ul.dataPane li.rarity
   Rare = 40
   for value in Rare
     &[data-value=\"{value}\"]
+      &:after
+        content "Rare"
+        background rgba(50,200,255,1)
+        -webkit-background-clip text
+        -webkit-text-fill-color transparent
+        visibility visible
+        position absolute
       .data
-        visibility hidden
-        &:after
-          content "Rare"
-          background rgba(50,200,255,1)
-          -webkit-background-clip text
-          -webkit-text-fill-color transparent
-          visibility visible
+        width: 0;
+        overflow: hidden;
+        height: 1.2rem;
 
+.cardFullInfo .cardDisplayInner ul.dataPane li.rarity
 #cardFullInfo .cardDisplayInner ul.dataPane li.rarity
   Premium = 1
   for value in Premium
