@@ -2040,40 +2040,72 @@ classStyles(c)
 
     &[data-location="me-backrow"]
     &[data-location="opponent-backrow"]
+      .card-inner
+        aspect-ratio 1
+        height auto
+
+        img
+          border-radius 10px
+          width 100%
+          object-fit cover
+          clip-path unset
+
       .media-content
         weaponShape() // Remains use same shape as weapons
       .property[data-name="cost"]
         display none
       .property[data-name="dur"]
         display block
+      .property[data-name="duration"]
+        statStyles()
+        padding 0
+        width 2rem
+        height 2rem
+        bottom -25%
+        left 50%
+        border-radius 50%
+        display flex
+        align-items center
+        justify-content center
+        transform translateX(-50%)
+        border 2px solid durColor
+        font-family: "Fjalla One", sans-serif;
       &[data-position="facedown"]
         &:after
-          content "?"
-          font-weight bold
-          font-size 2rem
-          display flex
-          align-items center
-          justify-content center
-          position absolute
-          width 100%
-          height 100%
-          color alpha(twistColor, 30%)
-          top 0
-          left 0
+          content: "?";
+          font-weight: bold;
+          font-size: 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          width: 100%;
+          aspect-ratio: 1;
+          height: auto;
+          top: 0;
+          left: 0;
+          background: rgba(0, 0, 0, .8);
+          border-radius: 10px;
+          color: white;
+          text-shadow: 2px 2px black;
+          font-family: "Fjalla One", sans-serif;
         &:before
-          content "."
           display block
-          height 100%
-          width 100%
-          weaponShape() // Twists use same shape as weapons
-          background alpha(twistColor, 20%)
-          box-shadow inset 1rem 0 1rem 1rem alpha(twistColor, 5%), inset -1rem 0 1rem 1rem alpha(twistColor, 5%), inset 0 2rem 1rem 1rem alpha(twistColor, 5%), inset 0 -2rem 1rem 1rem alpha(twistColor, 5%), inset 0.7rem 1.3rem 1.6rem 1.4rem alpha(twistColor, 5%), inset -0.7rem 1.3rem 1.6rem 1.4rem alpha(twistColor, 5%), inset -0.7rem -1.3rem 1.6rem 1.4rem alpha(twistColor, 5%), inset 0.7rem -1.3rem 1.6rem 1.4rem alpha(twistColor, 5%)
+          aspect-ratio: 1;
+          content: "";
+          width: calc(100% + 6px);
+          height auto
+          position: absolute;
+          background: linear-gradient(to bottom, #49e0f4, #266aff);
+          top: -3px;
+          left: -3px;
+          border-radius: 10px;
+          z-index: -1;
         &:hover
           &:after
             content "Twist"
-            color alpha(twistColor, 60%)
             font-weight 400
-            font-size 1rem
+            font-size 1.3rem
         .property
           display none
 
@@ -2085,41 +2117,63 @@ classStyles(c)
     &[data-location="opponent-board1"]
     &[data-location="opponent-board2"]
     &[data-location="opponent-board3"]
-    &[data-location="opponent-board"]  .card-inner
-    &[data-location="opponent-board1"]  .card-inner
-    &[data-location="opponent-board2"]  .card-inner
-    &[data-location="opponent-board3"]  .card-inner
     &[data-location="me-board"]
     &[data-location="me-board1"]
     &[data-location="me-board2"]
     &[data-location="me-board3"]
-    &[data-location="me-board"] .card-inner
-    &[data-location="me-board1"] .card-inner
-    &[data-location="me-board2"] .card-inner
-    &[data-location="me-board3"] .card-inner
-      &:before
-        content ""
-        width calc(100% + 6px)
-        height calc(100% + 6px)
-        position absolute
-        background linear-gradient(to bottom, lightBorderGradientColor, darkBorderGradientColor)
-        clip-path ellipse(50% 50% at 50% 50%)
-        top -3px
-        left -3px
+      &, .card-inner
+        &:before
+          content ""
+          width calc(100% + 6px)
+          height calc(100% + 6px)
+          position absolute
+          background linear-gradient(to bottom, lightBorderGradientColor, darkBorderGradientColor)
+          clip-path ellipse(50% 50% at 50% 50%)
+          top -3px
+          left -3px
 
-      &:after
-        content ""
-        width 100%
-        height 100%
-        position absolute
-        top 0
-        left 0
-        box-shadow inset 2px 2px 10px rgba(0,0,0,.5), inset -2px -2px 10px rgba(0,0,0,.5), inset 2px -2px 10px rgba(0,0,0,.5), inset -2px 2px 10px rgba(0,0,0,.5)
-        clip-path ellipse(50% 50% at 50% 50%)
-        border-radius 50%
+        &:after
+          content ""
+          width 100%
+          height 100%
+          position absolute
+          top 0
+          left 0
+          box-shadow inset 2px 2px 10px rgba(0,0,0,.5), inset -2px -2px 10px rgba(0,0,0,.5), inset 2px -2px 10px rgba(0,0,0,.5), inset -2px 2px 10px rgba(0,0,0,.5)
+          clip-path ellipse(50% 50% at 50% 50%)
+          border-radius 50%
 
-      .card-wrapper, .properties
-        z-index 1
+        .card-wrapper, .properties
+          z-index 1
+
+    &[data-location="me-backrow"]
+    &[data-location="opponent-backrow"]
+      .card-inner
+        &:before
+          content ""
+          width calc(100% + 6px)
+          height calc(100% + 6px)
+          position absolute
+          background linear-gradient(to bottom, lightBorderGradientColor, darkBorderGradientColor)
+          top -3px
+          left -3px
+          border-radius 10px
+          z-index -1
+
+        &:after
+          content ""
+          width 100%
+          height 100%
+          position absolute
+          top 0
+          left 0
+          box-shadow inset 2px 2px 10px rgba(0,0,0,.5), inset -2px -2px 10px rgba(0,0,0,.5), inset 2px -2px 10px rgba(0,0,0,.5), inset -2px 2px 10px rgba(0,0,0,.5)
+          border-radius 10px
+
+        .card-wrapper, .properties
+          z-index 1
+      &[data-position="facedown"] .card-inner
+        display none
 
     &[data-location="me-board"]
     &[data-location="opponent-board"]
