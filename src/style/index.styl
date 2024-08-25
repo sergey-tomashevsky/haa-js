@@ -2040,6 +2040,11 @@ classStyles(c)
 
     &[data-location="me-backrow"]
     &[data-location="opponent-backrow"]
+      .card-wrapper
+        display flex
+        justify-content center
+        align-items center
+
       .card-inner
         aspect-ratio 1
         height auto
@@ -2069,38 +2074,41 @@ classStyles(c)
         justify-content center
         transform translateX(-50%)
         border 2px solid durColor
-        font-family: "Fjalla One", sans-serif;
+        font-family "Fjalla One", sans-serif
       &[data-position="facedown"]
         &:after
-          content: "?";
-          font-weight: bold;
-          font-size: 2rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: absolute;
-          width: 100%;
-          aspect-ratio: 1;
-          height: auto;
-          top: 0;
-          left: 0;
-          background: rgba(0, 0, 0, .8);
-          border-radius: 10px;
-          color: white;
-          text-shadow: 2px 2px black;
-          font-family: "Fjalla One", sans-serif;
+          content "?"
+          font-weight bold
+          font-size 2rem
+          display flex
+          align-items center
+          justify-content center
+          position absolute
+          width 100%
+          aspect-ratio 1
+          height auto
+          top 50%
+          left 0
+          background rgba(0, 0, 0, .8)
+          border-radius 10px
+          color white
+          text-shadow 2px 2px black
+          font-family "Fjalla One", sans-serif
+          transform translateY(-50%)
+          box-shadow inset 0 0 8px rgba(0, 0, 0, .6)
         &:before
           display block
-          aspect-ratio: 1;
-          content: "";
-          width: calc(100% + 6px);
+          aspect-ratio 1
+          content ""
+          width calc(100% + 6px)
           height auto
-          position: absolute;
-          background: linear-gradient(to bottom, #49e0f4, #266aff);
-          top: -3px;
-          left: -3px;
-          border-radius: 10px;
-          z-index: -1;
+          position absolute
+          background linear-gradient(to bottom, #49e0f4, #266aff)
+          top 50%
+          left -3px
+          border-radius 10px
+          z-index -1
+          transform translateY(-50%)
         &:hover
           &:after
             content "Twist"
