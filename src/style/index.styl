@@ -168,6 +168,12 @@ afterlifeShape()
  * Animations. Cards with special keywords may be animated. Here is the library of animations.
  */
 
+@keyframes legendaryRarity
+  from
+    background-size 1%
+  to
+    background-size 100%
+
 @keyframes shieldThrob
   0%
     filter drop-shadow(0 -5px 5px #c6e000)
@@ -1026,7 +1032,7 @@ setNegativesToZero()
           font-family 'Rubik', sans-serif
           font-size x-small
           font-weight normal
-          bottom 0.7rem
+          bottom 0.8rem
           display flex
           justify-content center
           .data
@@ -1141,6 +1147,9 @@ setNegativesToZero()
       margin-top 1.25rem
       padding 1.5rem
       padding-top 0
+      text-shadow 0px 0px 10px lightblue
+      position relative
+      overflow visible
 
       .data
         z-index 1
@@ -1151,10 +1160,9 @@ setNegativesToZero()
         position absolute
         width 100px
         height 29px
-        bottom 1.6rem
         background black
         border-radius 50%
-        left 6.3rem
+        top: -0.75rem;
         z-index 0
         border-top 1px solid grey
 
@@ -3189,14 +3197,21 @@ body:not([achievement-tutorial_win="1"])
   Legendary = 80
   for value in Legendary
     &[data-value=\"{value}\"]
+      text-shadow 0px 0px 4px gold, 0px 0px 8px gold
+
       &:after
         content "Legendary"
-        background rgba(255,150,0,1)
+        background radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%)
         font-weight bold
         -webkit-background-clip text
         -webkit-text-fill-color transparent
         visibility visible
-        position: absolute;
+        position absolute
+        animation-name legendaryRarity
+        animation-duration 4s
+        animation-iteration-count infinite
+        animation-direction alternate-reverse
+        animation-timing-function ease-in
 
       .data
         width: 0;
