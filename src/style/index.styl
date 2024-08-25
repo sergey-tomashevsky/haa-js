@@ -104,6 +104,14 @@ cardTitleColorRules = {
     bottomBorderColor: #229954
   }
 }
+cardTitleDeckListColors = {
+  Idol: rgb(244, 208, 63),
+  Senshi: #CA6F1E,
+  Banchou: #A93226,
+  Gunshi: #2874A6,
+  Madoushi: #884EA0,
+  Okashii: #229954
+}
 
 // Keywords. Keywords come from the secondary properties section of a card type. Check the admin/gameplay page to set them. If set on a card, they will show up in the card info preview.
 keywords = hidden, vanguard, rush, "last life", legacy, frenzy, snipe, knocked-back, sacrifice, shield, overload, "warmed up", synergy, conjure, combatant, elusive, defense, poison, lifesteal, cannotAttack, spellPower, echo, immune, duration, silence, gemini, counter, field, armor, twist, remain, haste, frozen, damageVulnerability, damageResistance, damageImmunity, storedPower, sturdy, heroic actions, Sturdy, burn, soulEater, timeshifted, spellGuard, soulsCollected, curse, soulLinked, cold, heated,  BurnHeal, BurnImmune, conjured, bless, unarchived, ExtraCounter
@@ -3725,18 +3733,14 @@ body
             .name
               letter-spacing 0.5px
 
-          &:has(div[data-value="Idol"])
-            background-image linear-gradient(90deg, rgb(244, 208, 63), #FCF3CF)
-          &:has(div[data-value*="Senshi"])
-            background-image linear-gradient(90deg, #CA6F1E, #F0B27A)
-          &:has(div[data-value*="Banchou"])
-            background-image linear-gradient(90deg, #A93226, #F1948A)
-          &:has(div[data-value*="Gunshi"])
-            background-image linear-gradient(90deg, #2874A6, #5DADE2)
-          &:has(div[data-value*="Madoushi"])
-            background-image linear-gradient(90deg, #884EA0, #D7BDE2)
-          &:has(div[data-value*="Okashii"])
-            background-image linear-gradient(90deg, #229954, #F9E79F)
+          for key1, value1 in cardTitleDeckListColors
+            for key2, value2 in cardTitleDeckListColors
+              if key1 == key2
+                &:has(div[data-value=\"{key1}\"])
+                  background-image linear-gradient(90deg, value1, #E5E8E8)
+              else
+                &:has(div[data-value^=\"{key1}\"][data-value*=\"{key2}\"])
+                  background-image linear-gradient(90deg, value1, value2, #E5E8E8)
 
           img
             position absolute
