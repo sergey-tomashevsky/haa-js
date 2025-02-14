@@ -40,8 +40,9 @@ function initOnlinePlayerTracker() {
       }
 
       window.ty.realtime.send({
-        gameID: ty.dulst.gameID,
-        gameTitle: ty.dulst.gameTitle,
+        gameID: window.ty.dulst.gameID,
+        gameTitle: window.ty.dulst.gameTitle,
+        channel: window.ty.dulst.game.id,
         customType: "player-online",
         userName: window.ty.user.current.user,
         avatarUrl: window.ty.user.current.fieldAvatar,
@@ -52,6 +53,7 @@ function initOnlinePlayerTracker() {
   window.ty.realtime.send({
     gameID: ty.dulst.gameID,
     gameTitle: ty.dulst.gameTitle,
+    channel: window.ty.dulst.game.id,
     customType: "player-ping",
   });
 }
