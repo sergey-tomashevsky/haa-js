@@ -21,43 +21,6 @@ function executeRoute(url) {
   if (currentPage) currentPage.run();
 }
 
-function initOnlinePlayerTracker() {
-  let onlinePlayers = {};
-
-  window.ty.realtime.on("message", (message) => {
-    if (message.customType === "player-online") {
-      onlinePlayers[message.userName] = {
-        avatar: message.avatarUrl,
-      };
-      console.log('onlinePlayers', onlinePlayers);
-    }
-    if (message.customType === "player-disconnect") {
-      delete onlinePlayers[message.userName];
-    }
-    if (message.customType === "player-ping") {
-      if (!ty.user.current.profile.id) {
-        return;
-      }
-
-      window.ty.realtime.send({
-        gameID: window.ty.dulst.gameID,
-        gameTitle: window.ty.dulst.gameTitle,
-        channel: window.ty.dulst.game.id,
-        customType: "player-online",
-        userName: window.ty.user.current.user,
-        avatarUrl: window.ty.user.current.fieldAvatar,
-      });
-    }
-  });
-
-  window.ty.realtime.send({
-    gameID: ty.dulst.gameID,
-    gameTitle: ty.dulst.gameTitle,
-    channel: window.ty.dulst.game.id,
-    customType: "player-ping",
-  });
-}
-
 window.navigation.addEventListener("navigate", (event) => {
   if (currentPage) currentPage.disconnect();
   currentPage = null;
@@ -66,5 +29,3 @@ window.navigation.addEventListener("navigate", (event) => {
 
 executeRoute(window.location.href);
 fullCardInfoUpdater.run();
-
-initOnlinePlayerTracker();
