@@ -21,6 +21,37 @@ function executeRoute(url) {
   if (currentPage) currentPage.run();
 }
 
+function initOnlinePlayerTracker() {
+  let onlinePlayers = {};
+
+  window.ty.realtime.on("message", (message) => {
+    if (message.type === "player-online") {
+      onlinePlayers[message.userName] = {
+        avatar: message.avatarUrl,
+      };
+      console.log('onlinePlayers', onlinePlayers);
+    }
+    if (message.type === "player-disconnect") {
+      delete onlinePlayers[message.userName];
+    }
+    if (message.type === "player-ping") {
+      if (!ty.user.current.profile.id) {
+        return;
+      }
+
+      window.ty.realtime.send({
+        type: "player-online",
+        userName: window.ty.user.current.user,
+        avatarUrl: window.ty.user.current.fieldAvatar,
+      });
+    }
+  });
+
+  window.ty.realtime.send({
+    type: "player-ping",
+  });
+}
+
 window.navigation.addEventListener("navigate", (event) => {
   if (currentPage) currentPage.disconnect();
   currentPage = null;
@@ -29,3 +60,5 @@ window.navigation.addEventListener("navigate", (event) => {
 
 executeRoute(window.location.href);
 fullCardInfoUpdater.run();
+
+initOnlinePlayerTracker();
