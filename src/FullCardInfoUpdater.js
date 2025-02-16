@@ -9,7 +9,6 @@ export default class FullCardInfoUpdater extends Page {
     }
 
     const fullCardInfoObserver = new MutationObserver(() => {
-      console.log('FullCardInfoUpdater: MutationObserver callback');
       fixCardNameFontSize(cardInfoContainer);
     });
 
