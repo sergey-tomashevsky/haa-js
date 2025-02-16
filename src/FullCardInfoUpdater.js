@@ -5,6 +5,7 @@ export default class FullCardInfoUpdater extends Page {
   run() {
     const cardInfoContainer = document.querySelector('.card-info-container.popup:not(.customElement)');
     if (!cardInfoContainer) {
+      console.error("Card Info container not found");
       return;
     }
 
