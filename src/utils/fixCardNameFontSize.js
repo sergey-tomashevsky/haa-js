@@ -3,6 +3,7 @@ const fixCardNameFontSize = (container) => {
   const nameContainer = container.querySelector('.name');
   if (!nameContainer) return;
 
+  console.log('fixCardNameFontSize: Name found');
   const nameClone = nameContainer.cloneNode(true);
   nameClone.style.opacity = 0;
   nameClone.style.whiteSpace = 'nowrap';
