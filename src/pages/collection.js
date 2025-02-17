@@ -1,12 +1,17 @@
 import Page from "./page";
 
 const TYPE_OPTIONS = [
-  { text: 'Type', value: '' },
   { text: 'Hero', value: 'hero' },
   { text: 'Unit', value: 'unit' },
   { text: 'Spell', value: 'spell' },
   { text: 'Companion', value: 'equip' },
+  { text: 'Craft', value: 'craft' },
+  { text: 'Token', value: 'token' },
+  { text: 'Hero Power', value: 'heroPower' },
+  { text: 'Law', value: 'law' },
 ]
+
+let currentTypeFilter;
 
 export default class CollectionPage extends Page {
   run() {
@@ -60,12 +65,23 @@ function addCustomTypeNav() {
   newNav.classList.add('mainCardsNav');
   const newUl = document.createElement('ul');
   newNav.append(newUl);
-  (['hero', 'unit', 'spell', 'equip']).forEach((type) => {
+  (TYPE_OPTIONS).forEach((typeObj) => {
     const newLi = document.createElement('li');
     newUl.append(newLi);
     const newLink = document.createElement('a');
     newLink.href = '#';
-    newLink.textContent = type;
+    newLink.textContent = typeObj.text;
+
+    newLink.addEventListener('click', (event) => {
+      const linkParent = event.target.parentElement;
+      if (linkParent.classList.contains('active')) return;
+
+      linkParent.classList('active');
+      currentTypeFilter = typeObj.value;
+      console.log('Type filter:', currentTypeFilter);
+      // TODO: apply type filter
+    });
+
     newLi.append(newLink);
   });
   cardListHeader.after(newNav);
