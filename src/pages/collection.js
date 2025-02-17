@@ -94,10 +94,11 @@ function addCustomTypeNav() {
 
 function applyTypeFilter(type) {
   document.querySelectorAll('#libraryCards .mainCards > *').forEach((cardTypeContainer) => {
+    cardTypeContainer.querySelector('h5').style.display = 'none';
     if (cardTypeContainer.dataset.cardtype === type) {
-      cardTypeContainer.display = 'block';
+      cardTypeContainer.style.display = 'block';
     } else {
-      cardTypeContainer.display = 'none';
+      cardTypeContainer.style.display = 'none';
     }
   });
 }
