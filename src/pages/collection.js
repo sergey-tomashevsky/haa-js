@@ -49,10 +49,13 @@ function addCustomTypeNav() {
   newNav.classList.add('mainCardsNav');
   const newUl = document.createElement('ul');
   newNav.append(newUl);
-  (TYPE_OPTIONS).forEach((typeObj) => {
+  (TYPE_OPTIONS).forEach((typeObj, index) => {
     if (document.querySelector(`#libraryCards .mainCards > div[data-cardtype="${typeObj.value}"] > .card-list-container`)?.childNodes.length === 0) return;
 
     const newLi = document.createElement('li');
+    if (index === 0) {
+      newLi.classList.add('active');
+    }
     newUl.append(newLi);
     const newLink = document.createElement('a');
     newLink.href = '#';
