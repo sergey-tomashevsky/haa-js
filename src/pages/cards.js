@@ -6,12 +6,12 @@ const TYPE_OPTIONS = [
   { text: 'Unit', value: 'unit' },
   { text: 'Spell', value: 'spell' },
   { text: 'Companion', value: 'equip' },
-  { text: 'Adapt', value: 'upgrade' },
-  { text: 'Craft', value: 'craft' },
-  { text: 'Token', value: 'token' },
-  { text: 'Hero Power', value: 'heroPower' },
-  { text: 'Law', value: 'law' },
-  { text: 'Draft Pack', value: 'draftPack'},
+  { text: 'Adapt', value: 'upgrade', adminOnly: true },
+  { text: 'Craft', value: 'craft', adminOnly: true },
+  { text: 'Token', value: 'token', adminOnly: true },
+  { text: 'Hero Power', value: 'heroPower', adminOnly: true },
+  { text: 'Law', value: 'law', adminOnly: true },
+  { text: 'Draft Pack', value: 'draftPack', adminOnly: true },
 ];
 
 let currentTypeFilter;
@@ -101,7 +101,12 @@ function addCustomTypeNav() {
   newNav.classList.add('mainCardsNav');
   const newUl = document.createElement('ul');
   newNav.append(newUl);
+
+  const isUserAdmin = window.ty.dulst.admin;
+
   (TYPE_OPTIONS).forEach((typeObj) => {
+    if (typeObj.adminOnly && !isUserAdmin) return;
+
     if (document.querySelector(`#cardsList .mainCards > div[data-cardtype="${typeObj.value}"] > .card-list-container`)?.childNodes.length === 0) return;
 
     const newLi = document.createElement('li');
