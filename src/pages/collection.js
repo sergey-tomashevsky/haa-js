@@ -66,6 +66,8 @@ function addCustomTypeNav() {
   const newUl = document.createElement('ul');
   newNav.append(newUl);
   (TYPE_OPTIONS).forEach((typeObj) => {
+    if (document.querySelector(`#libraryCards .mainCards > div[data-cardtype="${typeObj.value}"] > .card-list-container`)?.childNodes.length === 0) return;
+
     const newLi = document.createElement('li');
     newUl.append(newLi);
     const newLink = document.createElement('a');
