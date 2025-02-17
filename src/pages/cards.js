@@ -1,6 +1,21 @@
 import fixCardNameFontSize from '../utils/fixCardNameFontSize';
 import Page from './page';
 
+const TYPE_OPTIONS = [
+  { text: 'Hero', value: 'hero' },
+  { text: 'Unit', value: 'unit' },
+  { text: 'Spell', value: 'spell' },
+  { text: 'Companion', value: 'equip' },
+  { text: 'Adapt', value: 'upgrade' },
+  { text: 'Craft', value: 'craft' },
+  { text: 'Token', value: 'token' },
+  { text: 'Hero Power', value: 'heroPower' },
+  { text: 'Law', value: 'law' },
+  { text: 'Draft Pack', value: 'draftPack'},
+];
+
+let currentTypeFilter;
+
 export default class CardsPage extends Page {
   run()  {
     updateFullCardPreview();
@@ -8,6 +23,8 @@ export default class CardsPage extends Page {
     const observer = new MutationObserver(() => {
       const cardsContainer = document.getElementById('cardsList');
       if (!cardsContainer) return;
+
+      addCustomTypeNav();
 
       const cardsByIndex = window.ty.fullCardsListIndex.nid;
       cardsContainer.querySelectorAll('#card-list-container .card:not(.customElement)').forEach((card) => {
@@ -72,4 +89,60 @@ function addStat(statName, cardInfo, container, forceZeroIfNull = false) {
   stat.classList.add('mainProperty');
   stat.innerText = statValue;
   container.append(stat);
+}
+
+function addCustomTypeNav() {
+  const cardListContainer = document.getElementById('card-list-container');
+  if (cardListContainer.querySelector('.mainCardsNav')) return;
+
+  const cardListHeader = cardListContainer.querySelector('header');
+
+  const newNav = document.createElement('nav');
+  newNav.classList.add('mainCardsNav');
+  const newUl = document.createElement('ul');
+  newNav.append(newUl);
+  (TYPE_OPTIONS).forEach((typeObj) => {
+    if (document.querySelector(`#cardsList .mainCards > div[data-cardtype="${typeObj.value}"] > .card-list-container`)?.childNodes.length === 0) return;
+
+    const newLi = document.createElement('li');
+    newUl.append(newLi);
+    const newLink = document.createElement('a');
+    newLink.href = '#';
+    newLink.textContent = typeObj.text;
+
+    newLink.addEventListener('click', (event) => {
+      const linkParent = event.target.parentElement;
+      if (linkParent.classList.contains('active')) return;
+
+      linkParent.parentElement.querySelectorAll('li').forEach((li) => {
+        li.classList.remove('active');
+      });
+      linkParent.classList.add('active');
+      currentTypeFilter = typeObj.value;
+      console.log('Type filter:', currentTypeFilter);
+      applyTypeFilter(currentTypeFilter);
+    });
+
+    newLi.append(newLink);
+
+    const mainCardsContainer = cardListContainer.querySelector('.mainCards');
+    const observer = new MutationObserver(() => {
+      if (!currentTypeFilter) return;
+
+      applyTypeFilter(currentTypeFilter);
+    });
+    observer.observe(mainCardsContainer, { childList: true, subtree: true });
+  });
+  cardListHeader.after(newNav);
+}
+
+function applyTypeFilter(type) {
+  document.querySelectorAll('#cardsList .mainCards > *').forEach((cardTypeContainer) => {
+    cardTypeContainer.querySelector('h5').style.display = 'none';
+    if (cardTypeContainer.dataset.cardtype === type) {
+      cardTypeContainer.style.display = 'block';
+    } else {
+      cardTypeContainer.style.display = 'none';
+    }
+  });
 }

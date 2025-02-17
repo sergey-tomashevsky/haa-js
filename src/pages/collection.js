@@ -5,11 +5,13 @@ const TYPE_OPTIONS = [
   { text: 'Unit', value: 'unit' },
   { text: 'Spell', value: 'spell' },
   { text: 'Companion', value: 'equip' },
+  { text: 'Adapt', value: 'upgrade' },
   { text: 'Craft', value: 'craft' },
   { text: 'Token', value: 'token' },
   { text: 'Hero Power', value: 'heroPower' },
   { text: 'Law', value: 'law' },
-]
+  { text: 'Draft Pack', value: 'draftPack'},
+];
 
 let currentTypeFilter;
 
@@ -28,25 +30,6 @@ export default class CollectionPage extends Page {
         card.classList.add('visible');
       });
       return;
-
-      // TODO: filters temporary disabled until fixed.
-
-      const typeSelect = document.createElement('select');
-      typeSelect.classList.add('customSelect');
-      TYPE_OPTIONS.forEach((optionParams) => {
-        const option = document.createElement('option');
-        option.text = optionParams.text;
-        option.value = optionParams.value;
-        typeSelect.add(option);
-      });
-      typeSelect.addEventListener('change', (event) => {
-        console.log('Type select change', event);
-        applyTypeFilter(event.target.value);
-      })
-
-      libraryCards.querySelector('header .filters').prepend(typeSelect);
-
-      applyTypeFilter(document.currentTypeFilter || '');
     });
 
     const wrapper = document.getElementById('wrapper');
