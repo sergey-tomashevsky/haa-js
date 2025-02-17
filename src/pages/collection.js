@@ -88,6 +88,14 @@ function addCustomTypeNav() {
     });
 
     newLi.append(newLink);
+
+    const mainCardsContainer = cardListContainer.querySelector('mainCards');
+    const observer = new MutationObserver(() => {
+      if (!currentTypeFilter) return;
+
+      applyTypeFilter(currentTypeFilter);
+    });
+    observer.observe(mainCardsContainer, { childList: true, subtree: true });
   });
   cardListHeader.after(newNav);
 }
