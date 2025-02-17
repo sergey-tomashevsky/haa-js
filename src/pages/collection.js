@@ -66,7 +66,7 @@ function addCustomTypeNav() {
     const newLink = document.createElement('a');
     newLink.href = '#';
     newLink.textContent = type;
-    newLink.append(newLink);
+    newLi.append(newLink);
   });
   cardListHeader.after(newNav);
 }
