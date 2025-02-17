@@ -14,7 +14,7 @@ const TYPE_OPTIONS = [
   { text: 'Draft Pack', value: 'draftPack', adminOnly: true },
 ];
 
-let currentTypeFilter;
+let currentTypeFilter = 'hero';
 
 export default class CardsPage extends Page {
   run()  {
@@ -25,6 +25,7 @@ export default class CardsPage extends Page {
       if (!cardsContainer) return;
 
       addCustomTypeNav();
+      applyTypeFilter(currentTypeFilter);
 
       const cardsByIndex = window.ty.fullCardsListIndex.nid;
       cardsContainer.querySelectorAll('#card-list-container .card:not(.customElement)').forEach((card) => {

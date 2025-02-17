@@ -13,7 +13,7 @@ const TYPE_OPTIONS = [
   { text: 'Draft Pack', value: 'draftPack'},
 ];
 
-let currentTypeFilter;
+let currentTypeFilter = 'hero';
 
 export default class CollectionPage extends Page {
   run() {
@@ -22,6 +22,7 @@ export default class CollectionPage extends Page {
       if (!libraryCards) return;
 
       addCustomTypeNav();
+      applyTypeFilter(currentTypeFilter);
 
       // Skip updating if custom elements already exist.
       if (libraryCards.querySelector('.customSelect')) return;
