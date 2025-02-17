@@ -89,7 +89,7 @@ function addCustomTypeNav() {
 
     newLi.append(newLink);
 
-    const mainCardsContainer = cardListContainer.querySelector('mainCards');
+    const mainCardsContainer = cardListContainer.querySelector('.mainCards');
     const observer = new MutationObserver(() => {
       if (!currentTypeFilter) return;
 
