@@ -84,7 +84,7 @@ function addCustomTypeNav() {
       linkParent.classList.add('active');
       currentTypeFilter = typeObj.value;
       console.log('Type filter:', currentTypeFilter);
-      // TODO: apply type filter
+      applyTypeFilter(currentTypeFilter);
     });
 
     newLi.append(newLink);
@@ -93,12 +93,11 @@ function addCustomTypeNav() {
 }
 
 function applyTypeFilter(type) {
-  document.currentTypeFilter = type;
-  document.querySelectorAll('#libraryCards .card').forEach((card) => {
-    if (card.classList.contains(type) || type === '') {
-      card.classList.add('visible');
+  document.querySelectorAll('#libraryCards .mainCards > *').forEach((cardTypeContainer) => {
+    if (cardTypeContainer.dataset.cardtype === type) {
+      cardTypeContainer.display = 'block';
     } else {
-      card.classList.remove('visible');
+      cardTypeContainer.display = 'none';
     }
   });
 }
