@@ -78,6 +78,9 @@ function addCustomTypeNav() {
       const linkParent = event.target.parentElement;
       if (linkParent.classList.contains('active')) return;
 
+      linkParent.parentElement.querySelectorAll('li').forEach((li) => {
+        li.classList.remove('active');
+      });
       linkParent.classList.add('active');
       currentTypeFilter = typeObj.value;
       console.log('Type filter:', currentTypeFilter);
