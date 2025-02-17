@@ -14,6 +14,8 @@ export default class CollectionPage extends Page {
       const libraryCards = document.getElementById('libraryCards');
       if (!libraryCards) return;
 
+      addCustomTypeNav();
+
       // Skip updating if custom elements already exist.
       if (libraryCards.querySelector('.customSelect')) return;
 
@@ -46,6 +48,27 @@ export default class CollectionPage extends Page {
     observer.observe(wrapper, { childList: true, subtree: true });
     this._observers.push(observer);
   }
+}
+
+function addCustomTypeNav() {
+  const cardListContainer = document.getElementById('card-list-container');
+  if (cardListContainer.querySelector('.mainCardsNav')) return;
+
+  const cardListHeader = cardListContainer.querySelector('header');
+
+  const newNav = document.createElement('nav');
+  newNav.classList.add('mainCardsNav');
+  const newUl = document.createElement('ul');
+  newNav.append(newUl);
+  (['hero', 'unit', 'spell', 'equip']).forEach((type) => {
+    const newLi = document.createElement('li');
+    newUl.append(newLi);
+    const newLink = document.createElement('a');
+    newLink.href = '#';
+    newLink.textContent = type;
+    newLink.append(newLink);
+  });
+  cardListHeader.after(newNav);
 }
 
 function applyTypeFilter(type) {
