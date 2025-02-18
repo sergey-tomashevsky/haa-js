@@ -797,14 +797,6 @@ setNegativesToZero()
   .info
     position relative
 
-  .tooltip
-    padding 0.25rem 0.5rem
-    background rgba(0, 0, 0, .4)
-    border-radius 2rem
-    font-weight bold
-    border 1px solid black
-    line-height 1.2
-
   .classes
     display none
 
@@ -877,6 +869,14 @@ setNegativesToZero()
         align-items end
         justify-content space-between
         height 100%
+
+        span.type
+          padding 0.25rem 0.5rem
+          background rgba(0, 0, 0, .4)
+          border-radius 2rem
+          font-weight bold
+          border 1px solid black
+          line-height 1.2
 
     if OVERLAY_MAIN_PROPERTIES
       li
@@ -3638,6 +3638,8 @@ body
 .dataPane .desc .data {
   font-style italic
   font-size 0.9em
+  color rgba(255, 255, 255, 0.9) !important
+  text-shadow none !important
   cite {
     align-self end
   }
